@@ -38,6 +38,10 @@ int main(int argc, char** argv) {
     }
     glfwMakeContextCurrent(win);
 
+    int width, height;
+    glfwGetFramebufferSize(win, &width, &height);
+    glViewport(0, 0, width, height);
+
     // main loop
     while (!glfwWindowShouldClose(win)) {
         // render
