@@ -1,8 +1,3 @@
-class Vec3f {
-public:
-    float x;
-    float y;
-    float z;
-
-    Vec3f(float x, float y, float z) : x(x), y(y), z(z) {}
-};
+#ifndef MATH_3D_HPP
+#define MATH_3D_HPP
+#endif
