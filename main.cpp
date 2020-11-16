@@ -42,8 +42,12 @@ int main(int argc, char** argv) {
     glfwGetFramebufferSize(win, &width, &height);
     glViewport(0, 0, width, height);
 
+    glfwSwapInterval(1);
     // main loop
+    double time;
     while (!glfwWindowShouldClose(win)) {
+        // update
+        time = glfwGetTime();
         // render
         display();
         // swap buffers
