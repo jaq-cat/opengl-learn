@@ -1,6 +1,10 @@
 #include <fstream>
 #include <sstream>
+
 #include <iostream>
+#include <string>
+#include <string_view>
+
 #include <GL/glew.h>
 #define GLFW_DLL
 #include <GLFW/glfw3.h>
@@ -17,7 +21,7 @@ std::string load_file(const std::string& path) {
     auto ss = std::ostringstream{};
     std::ifstream file(path);
     ss << file.rdbuf();
-    return ss.str().c_str();
+    return ss.str();
 }
 
 int main(int argc, char** argv) {
