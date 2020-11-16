@@ -81,10 +81,9 @@ int main(int argc, char** argv) {
     glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 0, NULL);
 
     // shaders
-    string vs_string = load_file("shaders/vertex_shader.glsl");
-    string fs_string = load_file("shaders/fragment_shader.glsl");
-    const char* vs_c = vs_string.c_str();
-    const char* fs_c = fs_string.c_str();
+    std::string vs_string, fs_string;
+    const char* vs_c = (vs_string = load_file("shaders/vertex_shader.glsl")).c_str();
+    const char* fs_c = (fs_string = load_file("shaders/fragment_shader.glsl")).c_str();
 
     GLuint vs = glCreateShader(GL_VERTEX_SHADER);
     glShaderSource(vs, 1, &vs_c, NULL);
@@ -107,7 +106,7 @@ int main(int argc, char** argv) {
         glUseProgram(shader_program);
         glBindVertexArray(vao);
 
-        glDrawArrays(GL_TRIANGLES, 0, 3);
+        glDrawArrays(GL_LINE_LOOP, 0, 3);
 
         // poll events
         glfwPollEvents();
