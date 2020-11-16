@@ -40,6 +40,14 @@ int main(int argc, char** argv) {
     }
     glfwMakeContextCurrent(win);
 
+    // extension handler
+    glewExperimental = GL_TRUE;
+    glewInit();
+
+    // only draw closer values
+    glEnable(GL_DEPTH_TEST);
+    glDepthFunc(GL_LESS);
+
     int width, height;
     glfwGetFramebufferSize(win, &width, &height);
     glViewport(0, 0, width, height);
