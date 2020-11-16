@@ -1,15 +1,24 @@
 #include <fstream>
+#include <sstream>
 #include <iostream>
 #include <GL/glew.h>
 #define GLFW_DLL
 #include <GLFW/glfw3.h>
 
+using std::string;
 using std::cout;
 using std::endl;
 
 #define WIDTH 640
 #define HEIGHT 640
 //#define HEIGHT 480
+
+std::string load_file(const std::string& path) {
+    auto ss = std::ostringstream{};
+    std::ifstream file(path);
+    ss << file.rdbuf();
+    return ss.str();
+}
 
 int main(int argc, char** argv) {
     // initialize GLFW
@@ -68,25 +77,16 @@ int main(int argc, char** argv) {
     glBindBuffer(GL_ARRAY_BUFFER, vbo);
     glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 0, NULL);
 
-    const char* vertex_shader =
-    "#version 400\n"
-    "in vec3 vp;"
-    "void main() {"
-    "  gl_Position = vec4(vp, 1.0);"
-    "}";
-
-    const char* fragment_shader =
-    "#version 400\n"
-    "out vec4 frag_colour;"
-    "void main() {"
-    "  frag_colour = vec4(0.5, 0.0, 0.5, 1.0);"
-    "}";
+    string vs_string = load_file("shaders/vertex_shader.glsl");
+    string fs_string = load_file("shaders/fragment_shader.glsl");
+    const char* vs_c = vs_string.c_str();
+    const char* fs_c = fs_string.c_str();
 
     GLuint vs = glCreateShader(GL_VERTEX_SHADER);
-    glShaderSource(vs, 1, &vertex_shader, NULL);
+    glShaderSource(vs, 1, &vs_c, NULL);
     glCompileShader(vs);
     GLuint fs = glCreateShader(GL_FRAGMENT_SHADER);
-    glShaderSource(fs, 1, &fragment_shader, NULL);
+    glShaderSource(fs, 1, &fs_c, NULL);
     glCompileShader(fs);
 
     GLuint shader_program = glCreateProgram();
