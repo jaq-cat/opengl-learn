@@ -82,9 +82,6 @@ int main(int argc, char** argv) {
     const char* vs_c = vs_string.c_str();
     const char* fs_c = fs_string.c_str();
 
-    cout << vs_c << endl;
-    cout << fs_c << endl;
-
     GLuint vs = glCreateShader(GL_VERTEX_SHADER);
     glShaderSource(vs, 1, &vs_c, NULL);
     glCompileShader(vs);
