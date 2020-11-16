@@ -11,14 +11,6 @@ using std::endl;
 #define HEIGHT 640
 //#define HEIGHT 480
 
-void display() {
-    glClearColor(0.0, 0.0, 0.0, 1.0); // black opaque background
-    glClear(GL_COLOR_BUFFER_BIT); // clear color buffer
-    glEnd();
-
-    glFlush(); // render
-}
-
 int main(int argc, char** argv) {
     // initialize GLFW
     if (!glfwInit()) {
