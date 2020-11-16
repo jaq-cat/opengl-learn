@@ -1,8 +1,11 @@
 #include <iostream>
-#include <GL/glut.h>
+#include <GLFW/glfw3.h>
+
+#define WIDTH 640
+#define HEIGHT 480
 
 void display() {
-    glClearColor(0.1, 0.0, 0.1, 1.0); // dark purple background
+    glClearColor(0.3, 0.0, 0.3, 1.0); // dark purple background
     glClear(GL_COLOR_BUFFER_BIT); // clear color buffer
     glBegin(GL_QUADS);
         glColor3f(1.0, 0.0, 0.0);
@@ -15,11 +18,20 @@ void display() {
 }
 
 int main(int argc, char** argv) {
-    glutInit(&argc, argv);
-    glutCreateWindow("OpenGL!");
-    glutInitWindowSize(640, 480);
-    glutInitWindowPosition(50, 50);
-    glutDisplayFunc(display);
-    glutMainLoop();
+    GLFWwindow* win;
+    if (!glfwInit())
+        return -1;
+    win = glfwCreateWindow(WIDTH, HEIGHT, "Hello, world!", NULL, NULL);
+    if (!win) {
+        glfwTerminate();
+        return -1;
+    }
+    glfwMakeContextCurrent(win);
+    while (!glfwWindowShouldClose(win)) {
+        display();
+        glfwSwapBuffers(win);
+        glfwPollEvents();
+    }
+    glfwTerminate();
     return 0;
 }
