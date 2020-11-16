@@ -46,9 +46,10 @@ int main(int argc, char** argv) {
     glewExperimental = GL_TRUE;
     glewInit();
 
-    // only draw closer values
+    // configure sheet
     glEnable(GL_DEPTH_TEST);
     glDepthFunc(GL_LESS);
+    glLineWidth(1);
 
     int width, height;
     glfwGetFramebufferSize(win, &width, &height);
