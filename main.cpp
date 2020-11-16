@@ -1,3 +1,4 @@
+#include <fstream>
 #include <iostream>
 #include <GL/glew.h>
 #define GLFW_DLL
@@ -74,6 +75,33 @@ int main(int argc, char** argv) {
     glEnableVertexAttribArray(0);
     glBindBuffer(GL_ARRAY_BUFFER, vbo);
     glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 0, NULL);
+
+    const char* vertex_shader =
+    "#version 400\n"
+    "in vec3 vp;"
+    "void main() {"
+    "  gl_Position = vec4(vp, 1.0);"
+    "}";
+
+    const char* fragment_shader =
+    "#version 400\n"
+    "out vec4 frag_colour;"
+    "void main() {"
+    "  frag_colour = vec4(0.5, 0.0, 0.5, 1.0);"
+    "}";
+
+    GLuint vs = glCreateShader(GL_VERTEX_SHADER);
+    glShaderSource(vs, 1, &vertex_shader, NULL);
+    glCompileShader(vs);
+    GLuint fs = glCreateShader(GL_FRAGMENT_SHADER);
+    glShaderSource(fs, 1, &fragment_shader, NULL);
+    glCompileShader(fs);
+
+    GLuint shader_program = glCreateProgram();
+    glAttachShader(shader_program, fs);
+    glAttachShader(shader_program, vs);
+    glLinkProgram(shader_program);
+
 
     glfwTerminate();
     return 0;
