@@ -2,7 +2,9 @@
 #include <GL/glew.h>
 #define GLFW_DLL
 #include <GLFW/glfw3.h>
-#include "math_3d.hpp"
+
+using std::cout;
+using std::endl;
 
 #define WIDTH 640
 #define HEIGHT 640
@@ -49,8 +51,8 @@ int main(int argc, char** argv) {
     // get version info
     const GLubyte* renderer = glGetString(GL_RENDERER); // get renderer string
     const GLubyte* version = glGetString(GL_VERSION); // version as a string
-    printf("Renderer: %s\n", renderer);
-    printf("OpenGL version: %s\n", version);
+    cout << "Renderer: " << renderer << endl;
+    cout << "OpenGL version: " << version << endl;
 
     /* 
      * stuff
