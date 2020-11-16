@@ -2,7 +2,7 @@
 #include <GL/glut.h>
 
 void display() {
-    glClearColor(1.0, 0.0, 1.0, 1.0); // #ff00ff background
+    glClearColor(0.1, 0.0, 0.1, 1.0); // dark purple background
     glClear(GL_COLOR_BUFFER_BIT); // clear color buffer
     glBegin(GL_QUADS);
         glColor3f(1.0, 0.0, 0.0);
