@@ -102,6 +102,20 @@ int main(int argc, char** argv) {
     glAttachShader(shader_program, vs);
     glLinkProgram(shader_program);
 
+    while (!glfwWindowShouldClose(win)) {
+        // wipe drawing surface
+        glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
+        // use shaders
+        glUseProgram(shader_program);
+        // bind VAO
+        glBindVertexArray(vao);
+        // draw
+        glDrawArrays(GL_TRIANGLES, 0, 3);
+        // poll events
+        glfwPollEvents();
+        // show stuff
+        glfwSwapBuffers(win);
+    }
 
     glfwTerminate();
     return 0;
