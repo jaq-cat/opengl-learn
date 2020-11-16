@@ -56,9 +56,10 @@ int main(int argc, char** argv) {
 
     // triangle
     float points[] = {
-         0.0, 0.5,  0.0,
+         0.0,  0.5,  0.0,
          0.5, -0.5, 0.0,
-        -0.5, -0.5, 0.0
+        -0.5, -0.5, 0.0,
+         0.0, -1.0, 0.0,
     };
 
     initStuff(points, sizeof(points));
@@ -70,7 +71,7 @@ int main(int argc, char** argv) {
         // draw
         glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 
-        glDrawArrays(GL_LINE_LOOP, 0, 3);
+        glDrawArrays(GL_TRIANGLE_STRIP, 0, 4);
 
         // poll events
         glfwPollEvents();
