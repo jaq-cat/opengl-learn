@@ -14,8 +14,8 @@ using std::cout;
 using std::endl;
 
 #define WIDTH 640
-#define HEIGHT 640
-//#define HEIGHT 480
+//#define HEIGHT 640
+#define HEIGHT 480
 
 int main(int argc, char** argv) {
     // initialize GLFW
