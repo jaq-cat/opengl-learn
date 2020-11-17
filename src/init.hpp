@@ -26,6 +26,12 @@ void initStuff(float points[], size_t points_size) {
     GLuint vs = glCreateShader(GL_VERTEX_SHADER);
     glShaderSource(vs, 1, &vs_c, NULL);
     glCompileShader(vs);
+    int params = -1;
+    glGetShaderiv(vs, GL_COMPILE_STATUS, &params);
+    if (GL_TRUE != params) {
+        fprintf(stderr, "ERROR: GL shader %i failed to compile\n", vs);
+        printShaderInfoLog(vs);
+    }
     GLuint fs = glCreateShader(GL_FRAGMENT_SHADER);
     glShaderSource(fs, 1, &fs_c, NULL);
     glCompileShader(fs);
