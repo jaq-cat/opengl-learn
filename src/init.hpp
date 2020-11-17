@@ -46,6 +46,12 @@ void initStuff(float points[], size_t points_size) {
     glAttachShader(shader_program, fs);
     glAttachShader(shader_program, vs);
     glLinkProgram(shader_program);
+    params = -1;
+    glGetProgramiv(shader_program, GL_LINK_STATUS, &params);
+    if (GL_TRUE != params) {
+        fprintf(stderr, "ERROR: Failed to link shader program %u\n", shader_program);
+        printProgramInfoLog(shader_program);
+    }
 
     glUseProgram(shader_program);
     glBindVertexArray(vao);
