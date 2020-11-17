@@ -16,7 +16,7 @@ void initStuff(float points[], size_t points_size, float colors[], size_t colors
     glGenBuffers(1, &cvbo);
     glBindBuffer(GL_ARRAY_BUFFER, cvbo);
     glBufferData(GL_ARRAY_BUFFER, colors_size, colors, GL_STATIC_DRAW);
-    
+
     // vertex array object
     GLuint vao = 0;
     glGenVertexArrays(1, &vao);
