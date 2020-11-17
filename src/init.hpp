@@ -35,6 +35,12 @@ void initStuff(float points[], size_t points_size) {
     GLuint fs = glCreateShader(GL_FRAGMENT_SHADER);
     glShaderSource(fs, 1, &fs_c, NULL);
     glCompileShader(fs);
+    params = -1;
+    glGetShaderiv(fs, GL_COMPILE_STATUS, &params);
+    if (GL_TRUE != params) {
+        fprintf(stderr, "ERROR: GL shader %i failed to compile\n", fs);
+        printShaderInfoLog(fs);
+    }
 
     GLuint shader_program = glCreateProgram();
     glAttachShader(shader_program, fs);
