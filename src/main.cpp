@@ -62,6 +62,12 @@ int main(int argc, char** argv) {
          //0.0, -1.0, 0.0,
     };
 
+    float colors[] = {
+        1.0, 0.0, 0.0,
+        0.0, 1.0, 0.0,
+        0.0, 0.0, 1.0
+    };
+
     initStuff(points, sizeof(points));
 
     // main loop
