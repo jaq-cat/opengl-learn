@@ -1,7 +1,11 @@
 #version 400
 
-in vec3 vp;
+layout(location = 0) in vec3 vpos;
+layout(location = 1) in vec3 vcol;
+
+out vec3 color;
 
 void main() {
-    gl_Position = vec4(vp, 1.0);
-};
+    color = vcol;
+    gl_Position = vec4(vpos, 1.0);
+}

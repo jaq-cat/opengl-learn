@@ -77,13 +77,16 @@ int main(int argc, char** argv) {
         // draw
         glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 
-        glDrawArrays(GL_TRIANGLE_STRIP, 0, 4);
+        glDrawArrays(GL_TRIANGLES, 0, 3);
 
         // poll events
         glfwPollEvents();
 
         // show stuff
         glfwSwapBuffers(win);
+        if (glfwGetKey(win, GLFW_KEY_ESCAPE)) {
+            glfwSetWindowShouldClose(win, 1);
+        }
     }
 
     glfwTerminate();

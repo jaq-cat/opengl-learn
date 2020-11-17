@@ -26,6 +26,9 @@ void initStuff(float points[], size_t points_size, float colors[], size_t colors
     glBindBuffer(GL_ARRAY_BUFFER, cvbo);
     glVertexAttribPointer(1, 3, GL_FLOAT, GL_FALSE, 0, NULL);
 
+    glEnableVertexAttribArray(0);
+    glEnableVertexAttribArray(1);
+
     // shaders
     std::string vs_string, fs_string;
     const char* vs_c = (vs_string = load_file("shaders/vertex_shader.glsl")).c_str();
