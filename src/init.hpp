@@ -4,18 +4,23 @@
 #include "util.hpp"
 
 
-void initStuff(float points[], size_t points_size) {
-    // vertices or something
-    GLuint vbo = 0;
-    glGenBuffers(1, &vbo);
-    glBindBuffer(GL_ARRAY_BUFFER, vbo);
+void initStuff(float points[], size_t points_size, float colors[], size_t colors_size) {
+    // points VBO
+    GLuint pvbo = 0;
+    glGenBuffers(1, &pvbo);
+    glBindBuffer(GL_ARRAY_BUFFER, pvbo);
     glBufferData(GL_ARRAY_BUFFER, points_size, points, GL_STATIC_DRAW);
+    // colors VBO
+    GLuint cvbo = 0;
+    glGenBuffers(1, &cvbo);
+    glBindBuffer(GL_ARRAY_BUFFER, cvbo);
+    glBufferData(GL_ARRAY_BUFFER, colors_size, colors, GL_STATIC_DRAW);
     
     GLuint vao = 0;
     glGenVertexArrays(1, &vao);
     glBindVertexArray(vao);
     glEnableVertexAttribArray(0);
-    glBindBuffer(GL_ARRAY_BUFFER, vbo);
+    glBindBuffer(GL_ARRAY_BUFFER, pvbo);
     glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 0, NULL);
 
     // shaders
