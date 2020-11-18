@@ -50,13 +50,13 @@ int main(int argc, char** argv) {
     cout << "OpenGL version: " << glGetString(GL_RENDERER)<< endl;
 
     // triangle
-    float points[] = {
+    GLfloat points[] = {
          0.0,  0.5,  0.0,
          0.5, -0.5, 0.0,
         -0.5, -0.5, 0.0,
          //0.0, -1.0, 0.0,
     };
-    float colors[] = {
+    GLfloat colors[] = {
         1.0, 0.0, 0.0, // RGB instead of XYZ
         0.0, 1.0, 0.0,
         0.0, 0.0, 1.0
