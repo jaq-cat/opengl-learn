@@ -51,11 +51,11 @@ int main(int argc, char** argv) {
 
     // triangle
     GLfloat points[] = {
-        -0.4,  0.8,  0.0, // top left
-         0.4,  0.8,  0.0, // top right
-         -0.4, -0.8, 0.0, // bottom left
-         0.4, -0.8, 0.0, // bottom right
-         0.0, -0.9, 0.0, // bottom
+        - 0.3,  0.8,  0.0, // top left
+          0.3,  0.8,  0.0, // top right
+         -0.6, -0.1, 0.0, // bottom left
+          0.6, -0.1, 0.0, // bottom right
+          0.0, -0.9, 0.0, // bottom
     };
     GLfloat colors[] = {
         1.0, 1.0, 1.0,
