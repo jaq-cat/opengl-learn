@@ -5,7 +5,7 @@
 
 using std::pair;
 
-void makeObject(GLfloat points[], size_t points_size, GLfloat colors[], size_t colors_size, GLuint &shader_program, GLuint &vao) {
+void makeObject(GLfloat points[], size_t points_size, GLfloat colors[], size_t colors_size, GLuint &vao) {
     // VAOs
     glGenVertexArrays(sizeof(vao) / sizeof(GLuint), &vao);
     glBindVertexArray(vao);
@@ -23,7 +23,9 @@ void makeObject(GLfloat points[], size_t points_size, GLfloat colors[], size_t c
     glBufferData(GL_ARRAY_BUFFER, colors_size, colors, GL_STATIC_DRAW);
     glVertexAttribPointer(1, 3, GL_FLOAT, GL_FALSE, 0, NULL); // bind this to index 1
     glEnableVertexAttribArray(1); // enable (shaders)
+}
 
+void makeShaders(GLuint &shader_program) {
     // shaders
     std::string vs_string, fs_string;
     const char* vs_c = (vs_string = load_file("shaders/vertex_shader.glsl")).c_str();

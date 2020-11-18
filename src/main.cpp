@@ -49,7 +49,7 @@ int main(int argc, char** argv) {
     cout << "Renderer: " << glGetString(GL_RENDERER) << endl;
     cout << "OpenGL version: " << glGetString(GL_RENDERER)<< endl;
 
-    // triangle
+    // shape
     GLfloat points[] = {
         - 0.3,  0.8,  0.0, // top left
           0.3,  0.8,  0.0, // top right
@@ -64,10 +64,11 @@ int main(int argc, char** argv) {
         0.0, 1.0, 1.0,
         0.0, 0.0, 1.0
     };
-    GLuint shader_program;
     GLuint vao;
-    makeObject(points, sizeof(points), colors, sizeof(colors), shader_program, vao);
+    makeObject(points, sizeof(points), colors, sizeof(colors), vao);
 
+    GLuint shader_program;
+    makeShaders(shader_program);
     // main loop
     while (!glfwWindowShouldClose(win)) {
         // update
@@ -75,10 +76,10 @@ int main(int argc, char** argv) {
         // draw
         glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 
-        // draw triangle
+        // draw points
         glUseProgram(shader_program);
-        glBindVertexArray(vao); // switch to triangle VAO
-        glDrawArrays(GL_TRIANGLE_STRIP, 0, sizeof(points) / sizeof(GLfloat)); // draw triangle VAO
+        glBindVertexArray(vao); // switch to points VAO
+        glDrawArrays(GL_TRIANGLE_STRIP, 0, sizeof(points) / sizeof(GLfloat)); // draw points VAO
 
         // poll events
         glfwPollEvents();
