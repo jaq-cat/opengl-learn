@@ -51,23 +51,39 @@ int main(int argc, char** argv) {
     cout << "Renderer: " << glGetString(GL_RENDERER) << endl;
     cout << "OpenGL version: " << glGetString(GL_RENDERER)<< endl;
 
-    // shape
-    GLfloat points[] = {
-        - 0.3,  0.8,  0.0, // top left
+    // shape A
+    GLfloat a_points[] = {
+         -0.3,  0.8,  0.0, // top left
           0.3,  0.8,  0.0, // top right
          -0.6, -0.1, 0.0, // bottom left
           0.6, -0.1, 0.0, // bottom right
           0.0, -0.9, 0.0, // bottom
     };
-    GLfloat colors[] = {
-        1.0, 1.0, 1.0,
-        1.0, 1.0, 1.0, // RGB instead of XYZ
-        0.0, 1.0, 1.0,
-        0.0, 1.0, 1.0,
-        0.0, 0.0, 1.0
+    GLfloat a_colors[] = {
+         1.0, 1.0, 1.0,
+         1.0, 1.0, 1.0, // RGB instead of XYZ
+         0.0, 1.0, 1.0,
+         0.0, 1.0, 1.0,
+         0.0, 0.0, 1.0
     };
-    GLuint vao;
-    makeObject(points, sizeof(points), colors, sizeof(colors), vao);
+
+    // shape B
+    GLfloat b_points[] = {
+         -0.5,  1.5, 0.0, // top left
+          0.5,  1.5, 0.0, // top right
+         -0.5,  1.0, 0.0, // bottom right
+          0.5,  1.0, 0.0, // bottom left
+    };
+    GLfloat b_colors[] = {
+        1.0, 0.0, 1.0,
+        1.0, 0.0, 1.0,
+        1.0, 0.0, 1.0,
+        1.0, 0.0, 1.0,
+    };
+
+    GLuint a_vao, b_vao;
+    makeObject(a_points, sizeof(a_points), a_colors, sizeof(a_colors), a_vao);
+    makeObject(b_points, sizeof(b_points), b_colors, sizeof(b_colors), b_vao);
 
     GLuint shader_program;
     makeShaders(shader_program);
@@ -81,8 +97,10 @@ int main(int argc, char** argv) {
 
         // draw points
         glUseProgram(shader_program);
-        glBindVertexArray(vao); // switch to points VAO
-        glDrawArrays(GL_TRIANGLE_STRIP, 0, (sizeof(points) / sizeof(GLfloat)) / 3); // draw points VAO
+        glBindVertexArray(a_vao); // switch to a VAO
+        glDrawArrays(GL_TRIANGLE_STRIP, 0, (sizeof(a_points) / sizeof(GLfloat)) / 3); // draw points VAO
+        glBindVertexArray(b_vao); // switch to b VAO
+        glDrawArrays(GL_TRIANGLE_STRIP, 0, (sizeof(b_points) / sizeof(GLfloat)) / 3); // draw points VAO
 
         // floosh
         glFlush();
