@@ -5,27 +5,6 @@
 
 using std::pair;
 
-
-void linkProgram(GLuint &shader_program) {
-    glLinkProgram(shader_program);
-    int params = -1;
-    glGetProgramiv(shader_program, GL_LINK_STATUS, &params);
-    if (params != GL_TRUE) {
-        fprintf(stderr, "ERROR: Failed to link shader program %u\n", shader_program);
-        printProgramInfoLog(shader_program);
-    }
-}
-
-void compileShader(GLuint &fs) {
-    glCompileShader(fs);
-    int params = -1;
-    glGetShaderiv(fs, GL_COMPILE_STATUS, &params);
-    if (params != GL_TRUE) {
-        fprintf(stderr, "ERROR: GL shader %i failed to compile\n", fs);
-        printShaderInfoLog(fs);
-    }
-}
-
 void makeObject(GLfloat points[], size_t points_size, GLfloat colors[], size_t colors_size, GLuint &shader_program, GLuint &vao) {
     // VAOs
     glGenVertexArrays(sizeof(vao) / sizeof(GLuint), &vao);

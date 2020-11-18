@@ -28,3 +28,24 @@ void printProgramInfoLog(GLuint program) {
   glGetProgramInfoLog(program, maxLength, &actualLength, programLog);
   printf("program info log for GL index %u:\n%s", program, programLog);
 }
+
+
+void linkProgram(GLuint &shader_program) {
+    glLinkProgram(shader_program);
+    int params = -1;
+    glGetProgramiv(shader_program, GL_LINK_STATUS, &params);
+    if (params != GL_TRUE) {
+        fprintf(stderr, "ERROR: Failed to link shader program %u\n", shader_program);
+        printProgramInfoLog(shader_program);
+    }
+}
+
+void compileShader(GLuint &fs) {
+    glCompileShader(fs);
+    int params = -1;
+    glGetShaderiv(fs, GL_COMPILE_STATUS, &params);
+    if (params != GL_TRUE) {
+        fprintf(stderr, "ERROR: GL shader %i failed to compile\n", fs);
+        printShaderInfoLog(fs);
+    }
+}
