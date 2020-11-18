@@ -6,7 +6,7 @@
 using std::pair;
 
 
-pair<GLuint, GLuint> initStuff(float points[], size_t points_size, float colors[], size_t colors_size, GLuint &shader_program, GLuint &vao) {
+:oid initStuff(float points[], size_t points_size, float colors[], size_t colors_size, GLuint &shader_program, GLuint &vao) {
     // vertex buffer objects
     // points
     GLuint pvbo = 0;
@@ -54,6 +54,7 @@ pair<GLuint, GLuint> initStuff(float points[], size_t points_size, float colors[
         printShaderInfoLog(fs);
     }
 
+    shader_program = glCreateShader();
     glAttachShader(shader_program, fs);
     glAttachShader(shader_program, vs);
     glLinkProgram(shader_program);
@@ -63,6 +64,4 @@ pair<GLuint, GLuint> initStuff(float points[], size_t points_size, float colors[
         fprintf(stderr, "ERROR: Failed to link shader program %u\n", shader_program);
         printProgramInfoLog(shader_program);
     }
-
-    return pair<GLuint, GLuint>(shader_program, vao);
 }
