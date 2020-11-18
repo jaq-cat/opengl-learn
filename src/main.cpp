@@ -74,8 +74,8 @@ int main(int argc, char** argv) {
 
         // draw triangle
         glUseProgram(shader_program);
-        glBindVertexArray(vao);
-        glDrawArrays(GL_TRIANGLES, 0, 3);
+        glBindVertexArray(vao); // switch to triangle VAO
+        glDrawArrays(GL_TRIANGLES, 0, 3); // draw triangle VAO
 
         // poll events
         glfwPollEvents();
