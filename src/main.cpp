@@ -69,7 +69,9 @@ int main(int argc, char** argv) {
         0.0, 0.0, 1.0
     };
 
-    auto pvao = initStuff(points, sizeof(points), colors, sizeof(colors));
+    GLuint shader_program;
+    GLuint vao;
+    initStuff(points, sizeof(points), colors, sizeof(colors), shader_program, vao);
 
     // main loop
     while (!glfwWindowShouldClose(win)) {
@@ -78,8 +80,8 @@ int main(int argc, char** argv) {
         // draw
         glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 
-        glUseProgram(pvao.first);
-        glBindVertexArray(pvao.second);
+        glUseProgram(shader_program);
+        glBindVertexArray(vao);
         glDrawArrays(GL_TRIANGLES, 0, 3);
 
         // poll events
