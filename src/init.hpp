@@ -33,20 +33,19 @@ void makeObject(GLfloat points[], size_t points_size, GLfloat colors[], size_t c
     GLuint cvbo = 0;
     glGenBuffers(1, &cvbo);
 
-    // generate VAOs
-    glGenVertexArrays(1, &vao);
-
-    // bind VAOs
+    // VAOs
+    glGenVertexArrays(sizeof(vao) / sizeof(GLuint), &vao);
     glBindVertexArray(vao);
     // bind points VBO
     glBindBuffer(GL_ARRAY_BUFFER, pvbo);
     glBufferData(GL_ARRAY_BUFFER, points_size, points, GL_STATIC_DRAW);
-    glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 0, NULL);
+    glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 0, NULL); // bind this to shader arg 0
     // bind colors VBO
     glBindBuffer(GL_ARRAY_BUFFER, cvbo);
     glBufferData(GL_ARRAY_BUFFER, colors_size, colors, GL_STATIC_DRAW);
-    glVertexAttribPointer(1, 3, GL_FLOAT, GL_FALSE, 0, NULL);
+    glVertexAttribPointer(1, 3, GL_FLOAT, GL_FALSE, 0, NULL); // bind this to shader arg 1
 
+    // enable shader args
     glEnableVertexAttribArray(0);
     glEnableVertexAttribArray(1);
 
