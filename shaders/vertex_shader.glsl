@@ -7,5 +7,5 @@ out vec3 color;
 
 void main() {
     color = vcol;
-    gl_Position = vec4(vpos, 1.0);
+    gl_Position = vec4(vpos, 2.0);
 }
