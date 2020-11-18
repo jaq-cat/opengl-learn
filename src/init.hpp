@@ -6,6 +6,26 @@
 using std::pair;
 
 
+void linkProgram(GLuint &shader_program) {
+    glLinkProgram(shader_program);
+    int params = -1;
+    glGetProgramiv(shader_program, GL_LINK_STATUS, &params);
+    if (params != GL_TRUE) {
+        fprintf(stderr, "ERROR: Failed to link shader program %u\n", shader_program);
+        printProgramInfoLog(shader_program);
+    }
+}
+
+void compileShader(GLuint &fs) {
+    glCompileShader(fs);
+    int params = -1;
+    glGetShaderiv(fs, GL_COMPILE_STATUS, &params);
+    if (params != GL_TRUE) {
+        fprintf(stderr, "ERROR: GL shader %i failed to compile\n", fs);
+        printShaderInfoLog(fs);
+    }
+}
+
 void initStuff(float points[], size_t points_size, float colors[], size_t colors_size, GLuint &shader_program, GLuint &vao) {
     // vertex buffer objects
     // points
@@ -46,22 +66,10 @@ void initStuff(float points[], size_t points_size, float colors[], size_t colors
     }
     GLuint fs = glCreateShader(GL_FRAGMENT_SHADER);
     glShaderSource(fs, 1, &fs_c, NULL);
-    glCompileShader(fs);
-    params = -1;
-    glGetShaderiv(fs, GL_COMPILE_STATUS, &params);
-    if (GL_TRUE != params) {
-        fprintf(stderr, "ERROR: GL shader %i failed to compile\n", fs);
-        printShaderInfoLog(fs);
-    }
+    compileShader(fs);
 
     shader_program = glCreateProgram();
     glAttachShader(shader_program, fs);
     glAttachShader(shader_program, vs);
-    glLinkProgram(shader_program);
-    params = -1;
-    glGetProgramiv(shader_program, GL_LINK_STATUS, &params);
-    if (GL_TRUE != params) {
-        fprintf(stderr, "ERROR: Failed to link shader program %u\n", shader_program);
-        printProgramInfoLog(shader_program);
-    }
+    linkProgram(shader_program);
 }
