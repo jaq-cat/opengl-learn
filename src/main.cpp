@@ -12,6 +12,7 @@
 using std::string;
 using std::cout;
 using std::endl;
+using std::pair;
 
 #define WIDTH 640
 //#define HEIGHT 640
@@ -68,7 +69,7 @@ int main(int argc, char** argv) {
         0.0, 0.0, 1.0
     };
 
-    initStuff(points, sizeof(points), colors, sizeof(colors));
+    auto pvao = initStuff(points, sizeof(points), colors, sizeof(colors));
 
     // main loop
     while (!glfwWindowShouldClose(win)) {
@@ -77,6 +78,8 @@ int main(int argc, char** argv) {
         // draw
         glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 
+        glUseProgram(pvao.first);
+        glBindVertexArray(pvao.second);
         glDrawArrays(GL_TRIANGLES, 0, 3);
 
         // poll events

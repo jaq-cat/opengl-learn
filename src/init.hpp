@@ -3,8 +3,10 @@
 #include <GLFW/glfw3.h>
 #include "util.hpp"
 
+using std::pair;
 
-void initStuff(float points[], size_t points_size, float colors[], size_t colors_size) {
+
+pair<GLuint, GLuint> initStuff(float points[], size_t points_size, float colors[], size_t colors_size) {
     // vertex buffer objects
     // points
     GLuint pvbo = 0;
@@ -64,6 +66,5 @@ void initStuff(float points[], size_t points_size, float colors[], size_t colors
         printProgramInfoLog(shader_program);
     }
 
-    glUseProgram(shader_program);
-    glBindVertexArray(vao);
+    return pair<GLuint, GLuint>(shader_program, vao);
 }
