@@ -27,23 +27,23 @@ void compileShader(GLuint &fs) {
 }
 
 void makeObject(GLfloat points[], size_t points_size, GLfloat colors[], size_t colors_size, GLuint &shader_program, GLuint &vao) {
-    // VBOs
-    GLuint vbos[] = {0, 0};
-    glGenBuffers(2, vbos);
-
     // VAOs
     glGenVertexArrays(sizeof(vao) / sizeof(GLuint), &vao);
     glBindVertexArray(vao);
-    // bind points VBO
+
+    // VBOs
+    GLuint vbos[] = {0, 0};
+    glGenBuffers(2, vbos);
+    // bind points to VBO 0
     glBindBuffer(GL_ARRAY_BUFFER, vbos[0]);
     glBufferData(GL_ARRAY_BUFFER, points_size, points, GL_STATIC_DRAW);
-    glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 0, NULL); // bind this to shader arg 0
-    glEnableVertexAttribArray(0); // enable
-    // bind colors VBO
+    glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 0, NULL); // bind this to index 0
+    glEnableVertexAttribArray(0); // enable (shaders)
+    // bind colors to VBO 1
     glBindBuffer(GL_ARRAY_BUFFER, vbos[1]);
     glBufferData(GL_ARRAY_BUFFER, colors_size, colors, GL_STATIC_DRAW);
-    glVertexAttribPointer(1, 3, GL_FLOAT, GL_FALSE, 0, NULL); // bind this to shader arg 1
-    glEnableVertexAttribArray(1); // enable
+    glVertexAttribPointer(1, 3, GL_FLOAT, GL_FALSE, 0, NULL); // bind this to index 1
+    glEnableVertexAttribArray(1); // enable (shaders)
 
     // shaders
     std::string vs_string, fs_string;
