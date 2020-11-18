@@ -82,7 +82,7 @@ int main(int argc, char** argv) {
         // draw points
         glUseProgram(shader_program);
         glBindVertexArray(vao); // switch to points VAO
-        glDrawArrays(GL_TRIANGLE_STRIP, 0, sizeof(points) / sizeof(GLfloat)); // draw points VAO
+        glDrawArrays(GL_TRIANGLE_STRIP, 0, (sizeof(points) / sizeof(GLfloat)) / 3); // draw points VAO
 
         // floosh
         glFlush();
