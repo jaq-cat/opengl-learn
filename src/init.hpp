@@ -26,7 +26,7 @@ void compileShader(GLuint &fs) {
     }
 }
 
-void initStuff(float points[], size_t points_size, float colors[], size_t colors_size, GLuint &shader_program, GLuint &vao) {
+void makeObject(float points[], size_t points_size, float colors[], size_t colors_size, GLuint &shader_program, GLuint &vao) {
     // vertex buffer objects
     // points
     GLuint pvbo = 0;

@@ -36,24 +36,18 @@ int main(int argc, char** argv) {
     }
     glfwMakeContextCurrent(win);
 
-    // extension handler
+    // GLEW
     glewExperimental = GL_TRUE;
     glewInit();
 
-    // configure sheet
+    // configuration
     glEnable(GL_DEPTH_TEST);
     glDepthFunc(GL_LESS);
     glLineWidth(1);
 
-    int width, height;
-    glfwGetFramebufferSize(win, &width, &height);
-    glViewport(0, 0, width, height);
-
-    // version info
-    const GLubyte* renderer = glGetString(GL_RENDERER); // get renderer string
-    const GLubyte* version = glGetString(GL_VERSION); // version as a string
-    cout << "Renderer: " << renderer << endl;
-    cout << "OpenGL version: " << version << endl;
+    // print opengl info
+    cout << "Renderer: " << glGetString(GL_RENDERER) << endl;
+    cout << "OpenGL version: " << glGetString(GL_RENDERER)<< endl;
 
     // triangle
     float points[] = {
@@ -62,16 +56,14 @@ int main(int argc, char** argv) {
         -0.5, -0.5, 0.0,
          //0.0, -1.0, 0.0,
     };
-
     float colors[] = {
         1.0, 0.0, 0.0, // RGB instead of XYZ
         0.0, 1.0, 0.0,
         0.0, 0.0, 1.0
     };
-
     GLuint shader_program;
     GLuint vao;
-    initStuff(points, sizeof(points), colors, sizeof(colors), shader_program, vao);
+    makeObject(points, sizeof(points), colors, sizeof(colors), shader_program, vao);
 
     // main loop
     while (!glfwWindowShouldClose(win)) {
@@ -80,6 +72,7 @@ int main(int argc, char** argv) {
         // draw
         glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 
+        // draw triangle
         glUseProgram(shader_program);
         glBindVertexArray(vao);
         glDrawArrays(GL_TRIANGLES, 0, 3);
