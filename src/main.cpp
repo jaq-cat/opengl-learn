@@ -28,6 +28,7 @@ int main(int argc, char** argv) {
 
     // initialize window
     glfwWindowHint(GLFW_RESIZABLE, GLFW_FALSE);
+    glfwWindowHint(GLFW_SAMPLES, 8);
     win = glfwCreateWindow(WIDTH, HEIGHT, "Hello, OpenGL!", NULL, NULL);
     if (!win) {
         fprintf(stderr, "Failed to initialize GLFW window");
@@ -42,6 +43,7 @@ int main(int argc, char** argv) {
 
     // configuration
     glEnable(GL_DEPTH_TEST);
+    glEnable(GL_MULTISAMPLE);
     glDepthFunc(GL_LESS);
     glLineWidth(1);
 
@@ -74,12 +76,16 @@ int main(int argc, char** argv) {
         // update
 
         // draw
+        glClearColor(0.0, 0.05, 0.1, 1);
         glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 
         // draw points
         glUseProgram(shader_program);
         glBindVertexArray(vao); // switch to points VAO
         glDrawArrays(GL_TRIANGLE_STRIP, 0, sizeof(points) / sizeof(GLfloat)); // draw points VAO
+
+        // floosh
+        glFlush();
 
         // poll events
         glfwPollEvents();
