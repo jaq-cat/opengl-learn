@@ -27,20 +27,22 @@ void compileShader(GLuint &fs) {
 }
 
 void makeObject(GLfloat points[], size_t points_size, GLfloat colors[], size_t colors_size, GLuint &shader_program, GLuint &vao) {
-    // vertex buffer objects
-    // points
+    // VBOs
     GLuint pvbo = 0;
     glGenBuffers(1, &pvbo);
-    // colors
     GLuint cvbo = 0;
     glGenBuffers(1, &cvbo);
 
-    // vertex array object
+    // generate VAOs
     glGenVertexArrays(1, &vao);
+
+    // bind VAOs
     glBindVertexArray(vao);
+    // bind points VBO
     glBindBuffer(GL_ARRAY_BUFFER, pvbo);
     glBufferData(GL_ARRAY_BUFFER, points_size, points, GL_STATIC_DRAW);
     glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 0, NULL);
+    // bind colors VBO
     glBindBuffer(GL_ARRAY_BUFFER, cvbo);
     glBufferData(GL_ARRAY_BUFFER, colors_size, colors, GL_STATIC_DRAW);
     glVertexAttribPointer(1, 3, GL_FLOAT, GL_FALSE, 0, NULL);
