@@ -54,12 +54,13 @@ int main(int argc, char** argv) {
          0.0,  0.5,  0.0,
          0.5, -0.5, 0.0,
         -0.5, -0.5, 0.0,
-         //0.0, -1.0, 0.0,
+         0.0, -1.0, 0.0,
     };
     GLfloat colors[] = {
         1.0, 0.0, 0.0, // RGB instead of XYZ
         0.0, 1.0, 0.0,
-        0.0, 0.0, 1.0
+        0.0, 0.0, 1.0,
+        1.0, 1.0, 1.0
     };
     GLuint shader_program;
     GLuint vao;
@@ -75,7 +76,7 @@ int main(int argc, char** argv) {
         // draw triangle
         glUseProgram(shader_program);
         glBindVertexArray(vao); // switch to triangle VAO
-        glDrawArrays(GL_TRIANGLES, 0, 3); // draw triangle VAO
+        glDrawArrays(GL_TRIANGLE_STRIP, 0, 4); // draw triangle VAO
 
         // poll events
         glfwPollEvents();
