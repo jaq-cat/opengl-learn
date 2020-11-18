@@ -57,13 +57,7 @@ void makeObject(GLfloat points[], size_t points_size, GLfloat colors[], size_t c
 
     GLuint vs = glCreateShader(GL_VERTEX_SHADER);
     glShaderSource(vs, 1, &vs_c, NULL);
-    glCompileShader(vs);
-    int params = -1;
-    glGetShaderiv(vs, GL_COMPILE_STATUS, &params);
-    if (GL_TRUE != params) {
-        fprintf(stderr, "ERROR: GL shader %i failed to compile\n", vs);
-        printShaderInfoLog(vs);
-    }
+    compileShader(vs);
     GLuint fs = glCreateShader(GL_FRAGMENT_SHADER);
     glShaderSource(fs, 1, &fs_c, NULL);
     compileShader(fs);
