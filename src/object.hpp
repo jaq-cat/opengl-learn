@@ -29,5 +29,7 @@ class Object {
         }
 
         void draw() {
+            glBindVertexArray(vao);
+            glDrawArrays(GL_TRIANGLE_STRIP, 0, (sizeof((GLuint *) (&points[0])) / sizeof(GLfloat)) / 3);
         }
 };
