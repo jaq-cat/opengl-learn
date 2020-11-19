@@ -4,6 +4,7 @@
 #include <cmath>
 #include "util.hpp"
 #include "init.hpp"
+#include "object.hpp"
 
 #include <GL/glew.h>
 #define GLFW_DLL
