@@ -2,9 +2,9 @@
 #include <string>
 #include <string_view>
 #include <cmath>
-#include "util.hpp"
-#include "init.hpp"
-#include "object.hpp"
+#include "../headers/util.hpp"
+#include "../headers/init.hpp"
+#include "../headers/object.hpp"
 
 #include <GL/glew.h>
 #define GLFW_DLL

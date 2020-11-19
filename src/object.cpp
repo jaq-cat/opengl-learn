@@ -1,4 +1,4 @@
-#include "object.hpp"
+#include "../headers/object.hpp"
 
 Object::Object(GLfloat *points, size_t points_size, GLfloat *colors, size_t colors_size) {
     this->points = points;

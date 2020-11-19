@@ -1,6 +1,6 @@
 #include <fstream>
 #include <sstream>
-#include "util.hpp"
+#include "../headers/util.hpp"
 
 std::string load_file(const std::string& path) {
     auto ss = std::ostringstream{};
