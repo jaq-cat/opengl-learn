@@ -67,6 +67,7 @@ int main(int argc, char** argv) {
          0.0, 1.0, 1.0,
          0.0, 0.0, 1.0
     };
+    Object shape_a(a_points, sizeof(a_points), a_colors, sizeof(a_colors));
 
     // shape B
     GLfloat b_points[] = {
@@ -81,10 +82,7 @@ int main(int argc, char** argv) {
         1.0, 0.0, 0.0,
         1.0, 1.0, 0.0,
     };
-
-    GLuint a_vao, b_vao;
-    makeObject(a_points, sizeof(a_points), a_colors, sizeof(a_colors), a_vao);
-    makeObject(b_points, sizeof(b_points), b_colors, sizeof(b_colors), b_vao);
+    Object shape_b(b_points, sizeof(b_points), b_colors, sizeof(b_colors));
 
     GLuint shader_program;
     makeShaders(shader_program);
@@ -98,10 +96,8 @@ int main(int argc, char** argv) {
 
         // draw points
         glUseProgram(shader_program);
-        glBindVertexArray(a_vao); // switch to a VAO
-        glDrawArrays(GL_TRIANGLE_STRIP, 0, (sizeof(a_points) / sizeof(GLfloat)) / 3); // draw points VAO
-        glBindVertexArray(b_vao); // switch to b VAO
-        glDrawArrays(GL_TRIANGLE_STRIP, 0, (sizeof(b_points) / sizeof(GLfloat)) / 3); // draw points VAO
+        shape_a.draw();
+        shape_b.draw();
 
         // floosh
         glFlush();
