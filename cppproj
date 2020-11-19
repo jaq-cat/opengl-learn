@@ -2,7 +2,6 @@ src/main.cpp
 src/object.cpp
 src/util.cpp
 src/init.cpp
-src/math.cpp
 -LIBS
 GL
 GLEW
