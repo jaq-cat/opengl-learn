@@ -51,7 +51,8 @@ int main(int argc, char** argv) {
 
     // print opengl info
     cout << "Renderer: " << glGetString(GL_RENDERER) << endl;
-    cout << "OpenGL version: " << glGetString(GL_RENDERER)<< endl;
+    cout << "OpenGL version: " << glGetString(GL_VERSION) << endl;
+    cout << "OpenGL vendor: " << glGetString(GL_VENDOR) << endl;
 
     // shape A
     GLfloat a_points[] = {
