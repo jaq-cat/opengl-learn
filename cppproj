@@ -1,0 +1,6 @@
+src/main.cpp
+src/object.cpp
+-LIBS
+GL
+GLEW
+glfw
