@@ -55,27 +55,27 @@ int main(int argc, char** argv) {
 
     // shape A
     GLfloat a_points[] = {
-         -0.3,  0.8,  0.0, // top left
-          0.3,  0.8,  0.0, // top right
-         -0.6, -0.1, 0.0, // bottom left
-          0.6, -0.1, 0.0, // bottom right
-          0.0, -0.9, 0.0, // bottom
+        -0.3,  0.8,  0.0, // top left
+         0.3,  0.8,  0.0, // top right
+        -0.6, -0.1, 0.0, // bottom left
+         0.6, -0.1, 0.0, // bottom right
+         0.0, -0.9, 0.0, // bottom
     };
     GLfloat a_colors[] = {
-         1.0, 1.0, 1.0,
-         1.0, 1.0, 1.0, // RGB instead of XYZ
-         0.0, 1.0, 1.0,
-         0.0, 1.0, 1.0,
-         0.0, 0.0, 1.0
+        1.0, 1.0, 1.0,
+        1.0, 1.0, 1.0, // RGB instead of XYZ
+        0.0, 1.0, 1.0,
+        0.0, 1.0, 1.0,
+        0.0, 0.0, 1.0
     };
     Object shape_a(a_points, sizeof(a_points), a_colors, sizeof(a_colors));
 
     // shape B
     GLfloat b_points[] = {
-         -0.5,  1.5, 0.0, // top left
-          0.5,  1.5, 0.0, // top right
-         -0.5,  1.0, 0.0, // bottom right
-          0.5,  1.0, 0.0, // bottom left
+        -0.5,  1.5, 0.0, // top left
+         0.5,  1.5, 0.0, // top right
+        -0.5,  1.0, 0.0, // bottom right
+         0.5,  1.0, 0.0, // bottom left
     };
     GLfloat b_colors[] = {
         1.0, 0.0, 0.0,
