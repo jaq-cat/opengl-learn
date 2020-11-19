@@ -1,5 +1,6 @@
 src/main.cpp
 src/object.cpp
+src/util.cpp
 -LIBS
 GL
 GLEW
