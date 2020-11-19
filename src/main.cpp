@@ -29,6 +29,7 @@ int main(int argc, char** argv) {
 
     // initialize window
     glfwWindowHint(GLFW_RESIZABLE, GLFW_FALSE);
+    glfwWindowHint(GLFW_DECORATED, GLFW_FALSE);
     glfwWindowHint(GLFW_SAMPLES, 8);
     win = glfwCreateWindow(WIDTH, HEIGHT, "Hello, OpenGL!", NULL, NULL);
     if (!win) {
