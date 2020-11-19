@@ -1,10 +1,10 @@
 #include <iostream>
 #include <string>
 #include <string_view>
-#include <cmath>
 #include "../headers/util.hpp"
 #include "../headers/init.hpp"
 #include "../headers/object.hpp"
+#include "../headers/math.hpp"
 
 #include <GL/glew.h>
 #define GLFW_DLL
