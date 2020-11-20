@@ -1,3 +1,4 @@
+-SOURCE
 src/main.cpp
 src/object.cpp
 src/util.cpp
