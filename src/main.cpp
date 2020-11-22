@@ -69,9 +69,9 @@ int main(int argc, char** argv) {
         0.0, 1.0, 1.0,
         0.0, 0.0, 1.0
     };
-    Object shape_a(a_points, sizeof(a_points), a_colors, sizeof(a_colors));
+    Object obj_a(a_points, sizeof(a_points), a_colors, sizeof(a_colors));
 
-    // shape B
+    // obj B
     GLfloat b_points[] = {
         -0.5,  1.5, 0.0, // top left
          0.5,  1.5, 0.0, // top right
@@ -84,7 +84,7 @@ int main(int argc, char** argv) {
         1.0, 0.0, 0.0,
         1.0, 1.0, 0.0,
     };
-    Object shape_b(b_points, sizeof(b_points), b_colors, sizeof(b_colors));
+    Object obj_b(b_points, sizeof(b_points), b_colors, sizeof(b_colors));
 
     GLuint shader_program;
     makeShaders(shader_program);
@@ -98,8 +98,8 @@ int main(int argc, char** argv) {
 
         // draw points
         glUseProgram(shader_program);
-        shape_a.draw();
-        shape_b.draw();
+        obj_a.draw();
+        obj_b.draw();
 
         // floosh
         glFlush();
