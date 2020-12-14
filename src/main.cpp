@@ -25,7 +25,7 @@ int main(int argc, char** argv) {
         fprintf(stderr, "Failed to initialize GLFW");
         return -1;
     }
-    GLFWwindow* win;
+    GLFWwindow *win;
 
     // initialize window
     glfwWindowHint(GLFW_RESIZABLE, GLFW_FALSE);

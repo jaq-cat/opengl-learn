@@ -26,8 +26,8 @@ void makeObject(GLfloat points[], size_t points_size, GLfloat colors[], size_t c
 void makeShaders(GLuint &shader_program) {
     // shaders
     std::string vs_string, fs_string;
-    const char* vs_c = (vs_string = load_file("shaders/vertex_shader.glsl")).c_str();
-    const char* fs_c = (fs_string = load_file("shaders/fragment_shader.glsl")).c_str();
+    const char *vs_c = (vs_string = load_file("shaders/vertex_shader.glsl")).c_str();
+    const char *fs_c = (fs_string = load_file("shaders/fragment_shader.glsl")).c_str();
 
     GLuint vs = glCreateShader(GL_VERTEX_SHADER);
     glShaderSource(vs, 1, &vs_c, NULL);
