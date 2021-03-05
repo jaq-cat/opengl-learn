@@ -57,13 +57,44 @@ int main(int argc, char** argv) {
 
     glfwSetInputMode(win, GLFW_STICKY_KEYS, GL_TRUE);
 
+    // vao
+    GLuint vaId;
+    glGenVertexArrays(1, &vaId);
+    glBindVertexArray(vaId);
+
+    // triangle
+    static const GLfloat tri_data[] = {
+        -1.0f, -1.0f, 0.0f,
+        1.0f, -1.0f, 0.0f,
+        0.0f,  1.0f, 0.0f,
+    };
+
+    // put triangle in opengl
+    GLuint vb;
+    glGenBuffers(1, &vb);
+    glBindBuffer(GL_ARRAY_BUFFER, vb);
+    glBufferData(GL_ARRAY_BUFFER, sizeof(tri_data), tri_data, GL_STATIC_DRAW);
+
     // main loop
     while (!glfwWindowShouldClose(win)) {
-        // update
-
-        // draw
+        // clear
         glClearColor(0.0, 0.05, 0.1, 1);
         glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
+
+        // draw
+        glEnableVertexAttribArray(1);
+        glBindBuffer(GL_ARRAY_BUFFER, vb);
+        glVertexAttribPointer(
+            0, // attr 0
+            3, // size
+            GL_FLOAT, // type
+            GL_FALSE, // normalized?
+            0, // stride
+            NULL // array buffer offset
+        );
+
+        glDrawArrays(GL_TRIANGLES, 0, 3); // starting from vertex 0; 3 vertices total -> 1 triangle
+        glDisableVertexAttribArray(0);
 
         glFlush();
         glfwPollEvents();
