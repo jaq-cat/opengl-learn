@@ -114,23 +114,24 @@ int main(int argc, char** argv) {
     };
 
     GLuint cube = createObject(cubeData, sizeof(cubeData));
+    glm::mat4 cubeMat = glm::translate(glm::vec3(2.f, 0.f, 0.f));
+
     GLuint triangle = createObject(triangleData, sizeof(triangleData));
-    GLuint programId = setupShaders("src/shaders/vertex.glsl", "src/shaders/frag.glsl");
+    glm::mat4 triangleMat = glm::translate(glm::vec3(-2.f, 0.f, 0.f));
 
-    // matrix stuff
-    glm::mat4 projection = glm::perspective(glm::radians(45.0f), WIDTH/HEIGHT, 0.1f, 100.f); // projection matrix
-
+    // setup projection and view matrices
+    glm::mat4 projection = glm::perspective(glm::radians(80.0f), WIDTH/HEIGHT, 0.1f, 100.f); // projection matrix
     glm::mat4 view = glm::lookAt(
-        glm::vec3(2, 2, 5), // world space
+        glm::vec3(5, 2, 3), // world space
         glm::vec3(0, 0, 0), // looking at 0, 0, 0
         glm::vec3(0, 1, 0)); // head up (0, -1, 0 to look upside down)
 
-    glm::mat4 triangleMat = glm::translate(glm::vec3(-1.5f, 0.f, 0.f)); // identity matrix (model is at the origin)
-    glm::mat4 cubeMat = glm::translate(glm::vec3(1.5f, 0.f, 0.f)); // identity matrix (model is at the origin)
-
+    // setup MVPs
     glm::mat4 triMvp = projection * view * triangleMat;
     glm::mat4 cubeMvp = projection * view * cubeMat;
 
+    // setup shaders and get matrix id
+    GLuint programId = setupShaders("src/shaders/vertex.glsl", "src/shaders/frag.glsl");
     GLuint matrixId = glGetUniformLocation(programId, "MVP");
 
     // z buffer
