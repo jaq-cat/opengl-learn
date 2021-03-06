@@ -21,8 +21,8 @@ using std::pair;
 
 using namespace glm;
 
-#define WIDTH 640.0f * 1.8f
-#define HEIGHT 480.0f * 1.8f
+#define WIDTH (640.f * 1.8f)
+#define HEIGHT (480.f * 1.8f)
 
 int main(int argc, char** argv) {
     glewExperimental = GL_TRUE; // initialize glfw
@@ -84,7 +84,7 @@ int main(int argc, char** argv) {
     // matrix stuff
     glm::mat4 projection = glm::perspective(45.0f, WIDTH/HEIGHT, 0.1f, 100.f);
     glm::mat4 view = glm::lookAt(
-        glm::vec3(4, 3, 3), // 4, 3, 3 in world space
+        glm::vec3(2, 2, 5), // world space
         glm::vec3(0, 0, 0), // looking at 0, 0, 0
         glm::vec3(0, 1, 0)); // head up (0, -1, 0 to look upside down)
 
