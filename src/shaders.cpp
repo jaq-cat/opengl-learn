@@ -64,7 +64,7 @@ GLuint createShaderProgram(vector<GLuint> shaderIds) {
 GLuint setupShaders(const char *vertexPath, const char *fragPath) {
     // Create shader objects
     GLuint vertexId = glCreateShader(GL_VERTEX_SHADER);
-    GLuint fragId = glCreateShader(GL_VERTEX_SHADER);
+    GLuint fragId = glCreateShader(GL_FRAGMENT_SHADER);
 
     // Compile shaders
     compileShader(vertexId, vertexPath);

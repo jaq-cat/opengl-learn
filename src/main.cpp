@@ -8,6 +8,8 @@
 
 #include <glm/glm.hpp>
 
+#include "common/shaders.hpp"
+
 using std::string;
 using std::cout;
 using std::cerr;
@@ -75,14 +77,19 @@ int main(int argc, char** argv) {
     glBindBuffer(GL_ARRAY_BUFFER, vb);
     glBufferData(GL_ARRAY_BUFFER, sizeof(tri_data), tri_data, GL_STATIC_DRAW);
 
+    GLuint programId = setupShaders("src/shaders/vertex.glsl", "src/shaders/frag.glsl");
+
     // main loop
     while (!glfwWindowShouldClose(win)) {
         // clear
-        glClearColor(0.0, 0.05, 0.1, 1);
+        glClearColor(0, 0, 0, 1);
         glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 
+        // shaders
+        glUseProgram(programId);
+
         // draw
-        glEnableVertexAttribArray(1);
+        glEnableVertexAttribArray(0);
         glBindBuffer(GL_ARRAY_BUFFER, vb);
         glVertexAttribPointer(
             0, // attr 0
