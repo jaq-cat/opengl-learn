@@ -12,6 +12,7 @@
 #include <glm/gtx/transform.hpp>
 
 #include "common/shaders.hpp"
+#include "common/objects.hpp"
 
 using std::string;
 using std::cout;
@@ -23,31 +24,6 @@ using namespace glm;
 
 #define WIDTH (640.f * 1.8f)
 #define HEIGHT (480.f * 1.8f)
-
-GLuint createObject(const GLfloat vb_data[], const int vb_data_sizeof) {
-    GLuint vb;
-    glGenBuffers(1, &vb);
-    glBindBuffer(GL_ARRAY_BUFFER, vb);
-    glBufferData(GL_ARRAY_BUFFER, vb_data_sizeof, vb_data, GL_STATIC_DRAW);
-
-    return vb;
-}
-
-void drawObject(const GLfloat objSize, const GLuint objId, const GLuint matrixId, const GLfloat *objMvp) {
-    glEnableVertexAttribArray(0);
-    glBindBuffer(GL_ARRAY_BUFFER, objId);
-    glVertexAttribPointer(
-        0, // layout(location = 0) in vertex shader
-        3, // size
-        GL_FLOAT, // type
-        GL_FALSE, // normalized?
-        0, // stride
-        NULL // array buffer offset
-    );
-    glDrawArrays(GL_TRIANGLES, 0, objSize/sizeof(GLfloat)/3);
-    glDisableVertexAttribArray(0);
-    glUniformMatrix4fv(matrixId, 1, GL_FALSE, objMvp);
-}
 
 int main(int argc, char** argv) {
     glewExperimental = GL_TRUE; // initialize glfw
@@ -139,11 +115,10 @@ int main(int argc, char** argv) {
 
     GLuint cube = createObject(cubeData, sizeof(cubeData));
     GLuint triangle = createObject(triangleData, sizeof(triangleData));
-
     GLuint programId = setupShaders("src/shaders/vertex.glsl", "src/shaders/frag.glsl");
 
     // matrix stuff
-    glm::mat4 projection = glm::perspective(45.0f, WIDTH/HEIGHT, 0.1f, 100.f); // projection matrix
+    glm::mat4 projection = glm::perspective(glm::radians(45.0f), WIDTH/HEIGHT, 0.1f, 100.f); // projection matrix
 
     glm::mat4 view = glm::lookAt(
         glm::vec3(2, 2, 5), // world space
