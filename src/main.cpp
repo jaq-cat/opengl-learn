@@ -73,6 +73,11 @@ int main(int argc, char** argv) {
         1.0f, -1.0f, 0.0f,
         0.0f,  1.0f, 0.0f,
     };
+    static const GLfloat triangleColor[] = {
+        1.0f,  0.0f, 0.0f,
+        1.0f,  0.0f, 0.0f,
+        1.0f,  0.0f, 0.0f,
+    };
 
     static const GLfloat cubeData[] = {
         -1.0f,-1.0f,-1.0f, // triangle 1 : begin
@@ -112,12 +117,17 @@ int main(int argc, char** argv) {
         -1.0f, 1.0f, 1.0f,
         1.0f,-1.0f, 1.0f
     };
-
-    GLuint cube = createObject(cubeData, sizeof(cubeData));
-    glm::mat4 cubeMat = glm::translate(glm::vec3(2.f, 0.f, 0.f));
+    static GLfloat cubeColor[12*3*3];
+    for (int i=0; i<12*3*3; i++)
+        cubeColor[i] = 1.0f;
 
     GLuint triangle = createObject(triangleData, sizeof(triangleData));
+    GLuint triangleCol = createObject(triangleColor, sizeof(triangleColor));
     glm::mat4 triangleMat = glm::translate(glm::vec3(-2.f, 0.f, 0.f));
+
+    GLuint cube = createObject(cubeData, sizeof(cubeData));
+    GLuint cubeCol = createObject(cubeColor, sizeof(cubeColor));
+    glm::mat4 cubeMat = glm::translate(glm::vec3(2.f, 0.f, 0.f));
 
     // setup projection and view matrices
     glm::mat4 projection = glm::perspective(glm::radians(80.0f), WIDTH/HEIGHT, 0.1f, 100.f); // projection matrix
@@ -148,8 +158,13 @@ int main(int argc, char** argv) {
         glUseProgram(programId);
 
         // draw objects
+        useColors(cubeCol);
         drawObject(sizeof(cubeData), cube, matrixId, &cubeMvp[0][0]);
+        glDisableVertexAttribArray(1);
+
+        useColors(triangleCol);
         drawObject(sizeof(triangleData), triangle, matrixId, &triMvp[0][0]);
+        glDisableVertexAttribArray(1);
 
         glFlush();
         glfwPollEvents();
