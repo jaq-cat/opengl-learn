@@ -118,8 +118,11 @@ int main(int argc, char** argv) {
         1.0f,-1.0f, 1.0f
     };
     static GLfloat cubeColor[12*3*3];
-    for (int i=0; i<12*3*3; i++)
-        cubeColor[i] = 1.0f;
+    for (int i=0; i<12*3; i++) {
+        cubeColor[3*i+0] = cubeData[3*i+0];
+        cubeColor[3*i+1] = cubeData[3*i+1];
+        cubeColor[3*i+2] = cubeData[3*i+2];
+    }
 
     GLuint triangle = createObject(triangleData, sizeof(triangleData));
     GLuint triangleCol = createObject(triangleColor, sizeof(triangleColor));
