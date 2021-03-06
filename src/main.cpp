@@ -24,6 +24,31 @@ using namespace glm;
 #define WIDTH (640.f * 1.8f)
 #define HEIGHT (480.f * 1.8f)
 
+GLuint createObject(const GLfloat vb_data[], const int vb_data_sizeof) {
+    GLuint vb;
+    glGenBuffers(1, &vb);
+    glBindBuffer(GL_ARRAY_BUFFER, vb);
+    glBufferData(GL_ARRAY_BUFFER, vb_data_sizeof, vb_data, GL_STATIC_DRAW);
+
+    return vb;
+}
+
+void drawObject(const GLfloat objSize, const GLuint objId, const GLuint matrixId, const GLfloat *objMvp) {
+    glEnableVertexAttribArray(0);
+    glBindBuffer(GL_ARRAY_BUFFER, objId);
+    glVertexAttribPointer(
+        0, // layout(location = 0) in vertex shader
+        3, // size
+        GL_FLOAT, // type
+        GL_FALSE, // normalized?
+        0, // stride
+        NULL // array buffer offset
+    );
+    glDrawArrays(GL_TRIANGLES, 0, objSize/sizeof(GLfloat)/3);
+    glDisableVertexAttribArray(0);
+    glUniformMatrix4fv(matrixId, 1, GL_FALSE, objMvp);
+}
+
 int main(int argc, char** argv) {
     glewExperimental = GL_TRUE; // initialize glfw
     if (!glfwInit()) {
@@ -66,8 +91,14 @@ int main(int argc, char** argv) {
     glGenVertexArrays(1, &vaId);
     glBindVertexArray(vaId);
 
-    // cube
-    static const GLfloat vb_data[] = {
+    // create objects
+    static const GLfloat triangleData[] = {
+        -1.0f, -1.0f, 0.0f,
+        1.0f, -1.0f, 0.0f,
+        0.0f,  1.0f, 0.0f,
+    };
+
+    static const GLfloat cubeData[] = {
         -1.0f,-1.0f,-1.0f, // triangle 1 : begin
         -1.0f,-1.0f, 1.0f,
         -1.0f, 1.0f, 1.0f, // triangle 1 : end
@@ -106,23 +137,24 @@ int main(int argc, char** argv) {
         1.0f,-1.0f, 1.0f
     };
 
-    // put triangle in opengl
-    GLuint vb;
-    glGenBuffers(1, &vb);
-    glBindBuffer(GL_ARRAY_BUFFER, vb);
-    glBufferData(GL_ARRAY_BUFFER, sizeof(vb_data), vb_data, GL_STATIC_DRAW);
+    GLuint cube = createObject(cubeData, sizeof(cubeData));
+    GLuint triangle = createObject(triangleData, sizeof(triangleData));
 
     GLuint programId = setupShaders("src/shaders/vertex.glsl", "src/shaders/frag.glsl");
 
     // matrix stuff
-    glm::mat4 projection = glm::perspective(45.0f, WIDTH/HEIGHT, 0.1f, 100.f);
+    glm::mat4 projection = glm::perspective(45.0f, WIDTH/HEIGHT, 0.1f, 100.f); // projection matrix
+
     glm::mat4 view = glm::lookAt(
         glm::vec3(2, 2, 5), // world space
         glm::vec3(0, 0, 0), // looking at 0, 0, 0
         glm::vec3(0, 1, 0)); // head up (0, -1, 0 to look upside down)
 
-    glm::mat4 model = glm::mat4(1.0f); // identity matrix (model is at the origin)
-    glm::mat4 mvp = projection * view * model;
+    glm::mat4 triangleMat = glm::translate(glm::vec3(-1.5f, 0.f, 0.f)); // identity matrix (model is at the origin)
+    glm::mat4 cubeMat = glm::translate(glm::vec3(1.5f, 0.f, 0.f)); // identity matrix (model is at the origin)
+
+    glm::mat4 triMvp = projection * view * triangleMat;
+    glm::mat4 cubeMvp = projection * view * cubeMat;
 
     GLuint matrixId = glGetUniformLocation(programId, "MVP");
 
@@ -139,23 +171,9 @@ int main(int argc, char** argv) {
         // shaders
         glUseProgram(programId);
 
-        // matrix stuff
-        glUniformMatrix4fv(matrixId, 1, GL_FALSE, &mvp[0][0]);
-
-        // draw
-        glEnableVertexAttribArray(0);
-        glBindBuffer(GL_ARRAY_BUFFER, vb);
-        glVertexAttribPointer(
-            0, // layout(location = 0) in vertex shader
-            3, // size
-            GL_FLOAT, // type
-            GL_FALSE, // normalized?
-            0, // stride
-            NULL // array buffer offset
-        );
-
-        glDrawArrays(GL_TRIANGLES, 0, sizeof(vb_data)/sizeof(GLfloat)/3); // starting from vertex 0; 3 vertices total -> 1 triangle
-        glDisableVertexAttribArray(0);
+        // draw objects
+        drawObject(sizeof(cubeData), cube, matrixId, &cubeMvp[0][0]);
+        drawObject(sizeof(triangleData), triangle, matrixId, &triMvp[0][0]);
 
         glFlush();
         glfwPollEvents();
