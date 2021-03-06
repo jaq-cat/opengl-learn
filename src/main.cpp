@@ -126,6 +126,10 @@ int main(int argc, char** argv) {
 
     GLuint matrixId = glGetUniformLocation(programId, "MVP");
 
+    // z buffer
+    glEnable(GL_DEPTH_TEST);
+    glDepthFunc(GL_LESS);
+
     // main loop
     while (!glfwWindowShouldClose(win)) {
         // clear
@@ -142,7 +146,7 @@ int main(int argc, char** argv) {
         glEnableVertexAttribArray(0);
         glBindBuffer(GL_ARRAY_BUFFER, vb);
         glVertexAttribPointer(
-            0, // attr 0
+            0, // layout(location = 0) in vertex shader
             3, // size
             GL_FLOAT, // type
             GL_FALSE, // normalized?
