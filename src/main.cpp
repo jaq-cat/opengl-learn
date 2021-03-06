@@ -7,6 +7,9 @@
 #include <GLFW/glfw3.h>
 
 #include <glm/glm.hpp>
+#include <glm/gtc/matrix_transform.hpp>
+#include <glm/ext/matrix_clip_space.hpp>
+#include <glm/gtx/transform.hpp>
 
 #include "common/shaders.hpp"
 
@@ -18,12 +21,11 @@ using std::pair;
 
 using namespace glm;
 
-#define WIDTH 640*1.8
-//#define HEIGHT 640
-#define HEIGHT 480*1.8
+#define WIDTH 640.0f * 1.8f
+#define HEIGHT 480.0f * 1.8f
 
 int main(int argc, char** argv) {
-    glewExperimental = GL_TRUE; // initialize GLFW
+    glewExperimental = GL_TRUE; // initialize glfw
     if (!glfwInit()) {
         cerr <<  "Failed to initialize GLFW" << endl;
         return -1;
@@ -31,7 +33,7 @@ int main(int argc, char** argv) {
     glfwWindowHint(GLFW_RESIZABLE, GLFW_FALSE); // no resize/decorate
     glfwWindowHint(GLFW_DECORATED, GLFW_TRUE);
 
-    glfwWindowHint(GLFW_CONTEXT_VERSION_MAJOR, 3); // OpenGL 3.3
+    glfwWindowHint(GLFW_CONTEXT_VERSION_MAJOR, 3); // opengl 3.3
     glfwWindowHint(GLFW_CONTEXT_VERSION_MINOR, 3);
     glfwWindowHint(GLFW_OPENGL_PROFILE, GLFW_OPENGL_CORE_PROFILE);
 
@@ -45,7 +47,7 @@ int main(int argc, char** argv) {
     }
     glfwMakeContextCurrent(win);
 
-    // GLEW
+    // glew
     if (glewInit() != GLEW_OK) {
         cerr << "Failed to initialzie GLEW" << endl;
         glfwTerminate();
@@ -79,6 +81,18 @@ int main(int argc, char** argv) {
 
     GLuint programId = setupShaders("src/shaders/vertex.glsl", "src/shaders/frag.glsl");
 
+    // matrix stuff
+    glm::mat4 projection = glm::perspective(45.0f, WIDTH/HEIGHT, 0.1f, 100.f);
+    glm::mat4 view = glm::lookAt(
+        glm::vec3(4, 3, 3), // 4, 3, 3 in world space
+        glm::vec3(0, 0, 0), // looking at 0, 0, 0
+        glm::vec3(0, 1, 0)); // head up (0, -1, 0 to look upside down)
+
+    glm::mat4 model = glm::mat4(1.0f); // identity matrix (model is at the origin)
+    glm::mat4 mvp = projection * view * model;
+
+    GLuint matrixId = glGetUniformLocation(programId, "MVP");
+
     // main loop
     while (!glfwWindowShouldClose(win)) {
         // clear
@@ -87,6 +101,9 @@ int main(int argc, char** argv) {
 
         // shaders
         glUseProgram(programId);
+
+        // matrix stuff
+        glUniformMatrix4fv(matrixId, 1, GL_FALSE, &mvp[0][0]);
 
         // draw
         glEnableVertexAttribArray(0);
