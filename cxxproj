@@ -1,7 +1,5 @@
 -SOURCE
-src/main.cpp
-src/shaders.cpp
-src/objects.cpp
+src/*.c
 -LIBS
 GL
 GLEW
