@@ -1,9 +1,9 @@
 #include "init.h"
 #include <stdio.h>
 
-void _triangleVBO() {
+GLuint _triangleVBO() {
 
-    GLfloat vertices[] = {
+    GLfloat positions[] = {
         -0.5f, -0.5f,
          0.0f,  0.5f,
          0.5f, -0.5f
@@ -12,7 +12,10 @@ void _triangleVBO() {
     GLuint vbo;
     glGenBuffers(1, &vbo);
     glBindBuffer(GL_ARRAY_BUFFER, vbo);
-    glBufferData(GL_ARRAY_BUFFER, sizeof(vertices)/sizeof(GLfloat), vertices, GL_STATIC_DRAW);
+    glBufferData(GL_ARRAY_BUFFER, sizeof(positions)/sizeof(GLfloat), positions, GL_STATIC_DRAW);
+    glBindBuffer(GL_ARRAY_BUFFER, 0);
+
+    return vbo;
 }
 
 int main() {
@@ -39,7 +42,7 @@ int main() {
     fprintf(stderr, "OpenGL vendor: %s\n", glGetString(GL_VENDOR));
     fprintf(stderr, "OpenGL version: %s\n", glGetString(GL_VERSION));
 
-    _triangleVBO();
+    int triangle = _triangleVBO();
 
     while (!glfwWindowShouldClose(win)) {
         // clear
@@ -48,11 +51,15 @@ int main() {
 
         // draw stuff
         glFlush();
-        glfwPollEvents();
+
+        glBindBuffer(GL_ARRAY_BUFFER, triangle);
+        glDrawArrays(GL_TRIANGLES, 0, 3);
+        glBindBuffer(GL_ARRAY_BUFFER, 0);
 
         // show stuff
         glfwSwapBuffers(win);
 
+        glfwPollEvents();
         // close window
         if (glfwGetKey(win, GLFW_KEY_ESCAPE))
             glfwSetWindowShouldClose(win, 1);
