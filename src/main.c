@@ -1,9 +1,23 @@
 #include "init.h"
 #include <stdio.h>
 
+void _triangleVBO() {
+
+    GLfloat vertices[] = {
+        -0.5f, -0.5f,
+         0.0f,  0.5f,
+         0.5f, -0.5f
+    };
+
+    GLuint vbo;
+    glGenBuffers(1, &vbo);
+    glBindBuffer(GL_ARRAY_BUFFER, vbo);
+    glBufferData(GL_ARRAY_BUFFER, sizeof(vertices)/sizeof(GLfloat), vertices, GL_STATIC_DRAW);
+}
+
 int main() {
     GLFWwindow *win;
-    int result = init(win);
+    int result = init(&win);
     if (result > 0) {
         fprintf(stderr, "[!] Failed to initialize ");
         switch (result) {
@@ -24,6 +38,8 @@ int main() {
     fprintf(stderr, "Renderer: %s\n", glGetString(GL_RENDERER));
     fprintf(stderr, "OpenGL vendor: %s\n", glGetString(GL_VENDOR));
     fprintf(stderr, "OpenGL version: %s\n", glGetString(GL_VERSION));
+
+    _triangleVBO();
 
     while (!glfwWindowShouldClose(win)) {
         // clear

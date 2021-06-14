@@ -1,6 +1,6 @@
 #include "init.h"
 
-int init(GLFWwindow *win) {
+int init(GLFWwindow **win) {
     glewExperimental = GL_TRUE;
     if (!glfwInit())
         return E_GLFW_INIT;
@@ -14,12 +14,12 @@ int init(GLFWwindow *win) {
 
     glfwWindowHint(GLFW_SAMPLES, 4); // 4x antialiasing
 
-    win = glfwCreateWindow(WIDTH, HEIGHT, "Hello, OpenGL!", NULL, NULL);
-    if (win == NULL) {
+    *win = glfwCreateWindow(WIDTH, HEIGHT, "Hello, OpenGL!", NULL, NULL);
+    if (*win == NULL) {
         glfwTerminate();
         return E_GLFW_WIN;
     }
-    glfwMakeContextCurrent(win);
+    glfwMakeContextCurrent(*win);
 
     // glew
     if (glewInit() != GLEW_OK) {
@@ -27,7 +27,7 @@ int init(GLFWwindow *win) {
         return E_GLEW_INIT;
     }
 
-    glfwSetInputMode(win, GLFW_STICKY_KEYS, GL_TRUE);
+    glfwSetInputMode(*win, GLFW_STICKY_KEYS, GL_TRUE);
 
     glEnable(GL_DEPTH_TEST);
     glDepthFunc(GL_LESS);
