@@ -60,9 +60,23 @@ GLuint shd_create(char *vrtx, char *frag) {
     glLinkProgram(program);
     glValidateProgram(program);
 
+    GLint result;
+    int infoLogLen;
+    glGetProgramiv(program, GL_LINK_STATUS, &result);
+    glGetProgramiv(program, GL_INFO_LOG_LENGTH, &infoLogLen);
+
+    if (infoLogLen > 0) {
+        char *errorMessage = malloc(infoLogLen*sizeof(char));
+        glGetProgramInfoLog(program, infoLogLen, NULL, &errorMessage[0]);
+        fprintf(stderr, "Error linking shaders: %s\n", &errorMessage[0]);
+        free(errorMessage);
+    }
+
     // delete shaders
-    /*glDeleteShader(vs);*/
-    /*glDeleteShader(fs);*/
+    glDetachShader(program, vs);
+    glDetachShader(program, fs);
+    glDeleteShader(vs);
+    glDeleteShader(fs);
     free(vrtx);
     free(frag);
 

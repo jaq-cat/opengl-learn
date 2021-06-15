@@ -1,6 +1,6 @@
 #include "vbo.h"
 
-int vbo_create(GLfloat data[], int size) {
+int vbo_create(GLfloat data[], GLuint size) {
     GLuint vbo;
     glGenBuffers(1, &vbo);
     glBindBuffer(GL_ARRAY_BUFFER, vbo);
