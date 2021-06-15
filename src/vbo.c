@@ -11,9 +11,11 @@ int create(GLfloat data[], int size) {
 }
 
 void bind(GLuint vbo) {
+    glBindBuffer(GL_ARRAY_BUFFER, vbo);
 }
 
 void unbind(GLuint vbo) {
+    glBindBuffer(GL_ARRAY_BUFFER, 0);
 }
 
 
