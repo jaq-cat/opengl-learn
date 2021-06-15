@@ -32,7 +32,19 @@ int main() {
          0.5f, -0.5f
     };
 
-    int triangle = VBO.create(positions, sizeof(positions));
+    GLuint tri = VBO.create(positions, sizeof(positions));
+
+    // how to use positions in the shader
+    VBO.bind(tri);
+    glEnableVertexAttribArray(0);
+    glVertexAttribPointer(
+        0,
+        2, // 2 numbers per attribute
+        GL_FLOAT, // type
+        GL_FALSE, // normalized?
+        sizeof(GLfloat)*2, // bytes to next attribute
+        0
+    );
 
     while (!glfwWindowShouldClose(win)) {
         // clear
@@ -42,7 +54,7 @@ int main() {
         // draw stuff
         glFlush();
 
-        VBO.bind(triangle);
+        VBO.bind(tri);
         glDrawArrays(GL_TRIANGLES, 0, 3);
         VBO.unbind();
 
