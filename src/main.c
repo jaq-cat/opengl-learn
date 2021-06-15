@@ -42,9 +42,9 @@ int main() {
         // draw stuff
         glFlush();
 
-        glBindBuffer(GL_ARRAY_BUFFER, triangle);
+        VBO.bind(triangle);
         glDrawArrays(GL_TRIANGLES, 0, 3);
-        glBindBuffer(GL_ARRAY_BUFFER, 0);
+        VBO.unbind();
 
         // show stuff
         glfwSwapBuffers(win);

@@ -4,7 +4,7 @@
 struct _s_vbo {
     int (*create)();
     void (*bind)(GLuint);
-    void (*unbind)(GLuint);
+    void (*unbind)();
 };
 
 extern const struct _s_vbo VBO;

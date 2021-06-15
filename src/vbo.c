@@ -14,7 +14,7 @@ void bind(GLuint vbo) {
     glBindBuffer(GL_ARRAY_BUFFER, vbo);
 }
 
-void unbind(GLuint vbo) {
+void unbind() {
     glBindBuffer(GL_ARRAY_BUFFER, 0);
 }
 
