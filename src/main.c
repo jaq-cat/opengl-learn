@@ -1,4 +1,5 @@
 #include "init.h"
+#include "vao.h"
 #include "vbo.h"
 #include "shaders.h"
 #include <stdlib.h>
@@ -34,19 +35,14 @@ int main() {
          0.5f, -0.5f
     };
 
-    GLuint tri = VBO.create(positions, sizeof(positions));
+    GLuint trivbo = VBO.create(positions, sizeof(positions));
 
     // how to use positions in the shader
-    VBO.bind(tri);
-    glEnableVertexAttribArray(0);
-    glVertexAttribPointer(
-        0,
-        2, // 2 numbers per attribute
-        GL_FLOAT, // type
-        GL_FALSE, // normalized?
-        sizeof(GLfloat)*2, // bytes to next attribute
-        0
-    );
+
+    VBO.bind(trivbo);
+    GLuint trivao = VAO.create();
+    VAO.bind(trivao);
+    VAO.attr(0, 2, GL_FLOAT, GL_FALSE, sizeof(GLfloat)*2);
 
     // shaders
     char *vertex = SHD.load("res/shaders/vertex.glsl");
@@ -61,11 +57,9 @@ int main() {
         glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 
         // draw stuff
-        glFlush();
+        /*glFlush();*/
 
-        VBO.bind(tri);
         glDrawArrays(GL_TRIANGLES, 0, 3);
-        VBO.unbind();
 
         // show stuff
         glfwSwapBuffers(win);
