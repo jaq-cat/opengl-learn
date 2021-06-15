@@ -1,22 +1,6 @@
 #include "init.h"
+#include "vbo.h"
 #include <stdio.h>
-
-GLuint _triangleVBO() {
-
-    GLfloat positions[] = {
-        -0.5f, -0.5f,
-         0.0f,  0.5f,
-         0.5f, -0.5f
-    };
-
-    GLuint vbo;
-    glGenBuffers(1, &vbo);
-    glBindBuffer(GL_ARRAY_BUFFER, vbo);
-    glBufferData(GL_ARRAY_BUFFER, sizeof(positions)/sizeof(GLfloat), positions, GL_STATIC_DRAW);
-    glBindBuffer(GL_ARRAY_BUFFER, 0);
-
-    return vbo;
-}
 
 int main() {
     GLFWwindow *win;
@@ -42,7 +26,13 @@ int main() {
     fprintf(stderr, "OpenGL vendor: %s\n", glGetString(GL_VENDOR));
     fprintf(stderr, "OpenGL version: %s\n", glGetString(GL_VERSION));
 
-    int triangle = _triangleVBO();
+    GLfloat positions[] = {
+        -0.5f, -0.5f,
+         0.0f,  0.5f,
+         0.5f, -0.5f
+    };
+
+    int triangle = VBO.create(positions, sizeof(positions));
 
     while (!glfwWindowShouldClose(win)) {
         // clear
