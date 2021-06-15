@@ -1,6 +1,6 @@
 #include "vbo.h"
 
-int create(GLfloat data[], int size) {
+int vbo_create(GLfloat data[], int size) {
     GLuint vbo;
     glGenBuffers(1, &vbo);
     glBindBuffer(GL_ARRAY_BUFFER, vbo);
@@ -10,17 +10,17 @@ int create(GLfloat data[], int size) {
     return vbo;
 }
 
-void bind(GLuint vbo) {
+void vbo_bind(GLuint vbo) {
     glBindBuffer(GL_ARRAY_BUFFER, vbo);
 }
 
-void unbind() {
+void vbo_unbind() {
     glBindBuffer(GL_ARRAY_BUFFER, 0);
 }
 
 
 const struct _s_vbo VBO = {
-    create,
-    bind,
-    unbind,
+    vbo_create,
+    vbo_bind,
+    vbo_unbind,
 };

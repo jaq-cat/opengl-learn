@@ -1,5 +1,7 @@
 #include "init.h"
 #include "vbo.h"
+#include "shaders.h"
+#include <stdlib.h>
 #include <stdio.h>
 
 int main() {
@@ -45,6 +47,13 @@ int main() {
         sizeof(GLfloat)*2, // bytes to next attribute
         0
     );
+
+    // shaders
+    char *vertex = SHD.load("res/shaders/vertex.glsl");
+    char *frag = SHD.load("res/shaders/frag.glsl");
+    GLuint shader = SHD.create(vertex, frag);
+
+    glUseProgram(shader);
 
     while (!glfwWindowShouldClose(win)) {
         // clear
