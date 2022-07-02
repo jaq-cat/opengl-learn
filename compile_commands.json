@@ -1,0 +1,82 @@
+[
+  {
+    "arguments": [
+      "/bin/gcc",
+      "-c",
+      "-Iinclude",
+      "-Wall",
+      "-O2",
+      "-std=gnu17",
+      "-o",
+      "a.out",
+      "src/init.c"
+    ],
+    "directory": "/home/jaqi/dev/opengl-learn",
+    "file": "/home/jaqi/dev/opengl-learn/src/init.c",
+    "output": "/home/jaqi/dev/opengl-learn/a.out"
+  },
+  {
+    "arguments": [
+      "/bin/gcc",
+      "-c",
+      "-Iinclude",
+      "-Wall",
+      "-O2",
+      "-std=gnu17",
+      "-o",
+      "a.out",
+      "src/main.c"
+    ],
+    "directory": "/home/jaqi/dev/opengl-learn",
+    "file": "/home/jaqi/dev/opengl-learn/src/main.c",
+    "output": "/home/jaqi/dev/opengl-learn/a.out"
+  },
+  {
+    "arguments": [
+      "/bin/gcc",
+      "-c",
+      "-Iinclude",
+      "-Wall",
+      "-O2",
+      "-std=gnu17",
+      "-o",
+      "a.out",
+      "src/shaders.c"
+    ],
+    "directory": "/home/jaqi/dev/opengl-learn",
+    "file": "/home/jaqi/dev/opengl-learn/src/shaders.c",
+    "output": "/home/jaqi/dev/opengl-learn/a.out"
+  },
+  {
+    "arguments": [
+      "/bin/gcc",
+      "-c",
+      "-Iinclude",
+      "-Wall",
+      "-O2",
+      "-std=gnu17",
+      "-o",
+      "a.out",
+      "src/vao.c"
+    ],
+    "directory": "/home/jaqi/dev/opengl-learn",
+    "file": "/home/jaqi/dev/opengl-learn/src/vao.c",
+    "output": "/home/jaqi/dev/opengl-learn/a.out"
+  },
+  {
+    "arguments": [
+      "/bin/gcc",
+      "-c",
+      "-Iinclude",
+      "-Wall",
+      "-O2",
+      "-std=gnu17",
+      "-o",
+      "a.out",
+      "src/vbo.c"
+    ],
+    "directory": "/home/jaqi/dev/opengl-learn",
+    "file": "/home/jaqi/dev/opengl-learn/src/vbo.c",
+    "output": "/home/jaqi/dev/opengl-learn/a.out"
+  }
+]

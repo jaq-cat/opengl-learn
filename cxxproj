@@ -1,6 +1,0 @@
--SOURCE
-src/*.c
--LIBS
-GL
-GLEW
-glfw
