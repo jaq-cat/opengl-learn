@@ -1,4 +1,4 @@
-ALLSRC  := $(wildcard src/*.c libs/*.c)
+ALLSRC  := $(wildcard src/*.c) libs/ecsj/ecsj.c
 SRC     := $(filter-out src/test.c, $(ALLSRC))
 TESTSRC := $(filter-out src/main.c, $(ALLSRC))
 PKGS    := 

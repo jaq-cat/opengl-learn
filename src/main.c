@@ -2,8 +2,31 @@
 #include "vao.h"
 #include "vbo.h"
 #include "shaders.h"
+#include "objects.h"
 #include <stdlib.h>
 #include <stdio.h>
+#include "ecsj/ecsj.h"
+
+object triangle;
+
+void tri_start() {
+}
+
+void tri_update() {
+}
+
+void tri_init() {
+  GLfloat positions[] = {
+    -0.5f, -0.5f,
+    0.0f,  0.5f,
+    0.5f, -0.5f
+  };
+
+  transform t = {0, 0};
+  GLuint m = vbo_create(positions, sizeof(positions));
+  collider c = {0};
+  triangle = obj_create(t, m, c, tri_start, tri_update);
+}
 
 int main() {
   GLFWwindow *win;
@@ -29,13 +52,11 @@ int main() {
   fprintf(stderr, "OpenGL vendor: %s\n", glGetString(GL_VENDOR));
   fprintf(stderr, "OpenGL version: %s\n", glGetString(GL_VERSION));
 
-  GLfloat positions[] = {
-    -0.5f, -0.5f,
-    0.0f,  0.5f,
-    0.5f, -0.5f
-  };
+  tri_init();
 
-  GLuint trivbo = vbo_create(positions, sizeof(positions));
+  ecsj_component *trivbo_c = ecsj_get_component(&triangle, Model);
+  GLuint trivbo;
+  memcpy(&trivbo, trivbo_c->content, sizeof(GLuint));
 
   // how to use positions in the shader
   vbo_bind(trivbo);
