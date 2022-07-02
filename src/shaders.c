@@ -50,9 +50,9 @@ GLuint shd_compile(const GLchar src[], GLenum type) {
   return id;
 }
 
-GLuint shd_create(char *vrtx, char *frag) {
+GLuint shd_create(char *vertex, char *frag) {
   GLuint program = glCreateProgram();
-  GLuint vs = shd_compile(vrtx, GL_VERTEX_SHADER);
+  GLuint vs = shd_compile(vertex, GL_VERTEX_SHADER);
   GLuint fs = shd_compile(frag, GL_FRAGMENT_SHADER);
 
   // create program
@@ -78,7 +78,7 @@ GLuint shd_create(char *vrtx, char *frag) {
   glDetachShader(program, fs);
   glDeleteShader(vs);
   glDeleteShader(fs);
-  free(vrtx);
+  free(vertex);
   free(frag);
 
   return program;

@@ -38,9 +38,8 @@ int main() {
   GLuint trivbo = vbo_create(positions, sizeof(positions));
 
   // how to use positions in the shader
-
   vbo_bind(trivbo);
-  GLuint trivao = vao_create();
+  GLuint trivao = vao_create(0, 0);
   vao_bind(trivao);
   vao_attr(0, 2, GL_FLOAT, GL_FALSE, sizeof(GLfloat)*2);
 
