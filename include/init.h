@@ -7,10 +7,10 @@
 #include "conf.h"
 
 enum ERORRS {
-    E_NONE = 0,
-    E_GLFW_INIT,
-    E_GLFW_WIN,
-    E_GLEW_INIT,
+  E_NONE = 0,
+  E_GLFW_INIT,
+  E_GLFW_WIN,
+  E_GLEW_INIT,
 };
 
 int init();
