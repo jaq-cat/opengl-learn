@@ -17,10 +17,3 @@ void vbo_bind(GLuint vbo) {
 void vbo_unbind() {
     glBindBuffer(GL_ARRAY_BUFFER, 0);
 }
-
-
-const struct _s_vbo VBO = {
-    vbo_create,
-    vbo_bind,
-    vbo_unbind,
-};

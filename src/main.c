@@ -35,19 +35,19 @@ int main() {
          0.5f, -0.5f
     };
 
-    GLuint trivbo = VBO.create(positions, sizeof(positions));
+    GLuint trivbo = vbo_create(positions, sizeof(positions));
 
     // how to use positions in the shader
 
-    VBO.bind(trivbo);
-    GLuint trivao = VAO.create();
-    VAO.bind(trivao);
-    VAO.attr(0, 2, GL_FLOAT, GL_FALSE, sizeof(GLfloat)*2);
+    vbo_bind(trivbo);
+    GLuint trivao = vao_create();
+    vao_bind(trivao);
+    vao_attr(0, 2, GL_FLOAT, GL_FALSE, sizeof(GLfloat)*2);
 
     // shaders
-    char *vertex = SHD.load("res/shaders/vertex.glsl");
-    char *frag = SHD.load("res/shaders/frag.glsl");
-    GLuint shader = SHD.create(vertex, frag);
+    char *vertex = shd_load("res/shaders/vertex.glsl");
+    char *frag = shd_load("res/shaders/frag.glsl");
+    GLuint shader = shd_create(vertex, frag);
 
     glUseProgram(shader);
 

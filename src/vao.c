@@ -26,11 +26,3 @@ void vao_attr(GLuint i, GLuint n, GLenum type, GLenum normalized, GLuint stride)
     );
 
 }
-
-
-const struct _s_vao VAO = {
-    vao_create,
-    vao_bind,
-    vao_unbind,
-    vao_attr,
-};

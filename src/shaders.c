@@ -1,10 +1,11 @@
 #include  "shaders.h"
 #include <stdlib.h>
 #include <stdio.h>
+#include <string.h>
 
 char* shd_load(char *filename) {
-    char* buffer = 0;
-    unsigned long length;
+    char* buffer = {0};
+    unsigned long length = 0;
     FILE *file = fopen(filename, "rb");
 
     if (file) {
@@ -20,7 +21,7 @@ char* shd_load(char *filename) {
 
     buffer[length] = '\0';
 
-    return buffer;
+    return strdup(buffer);
 }
 
 GLuint shd_compile(const GLchar src[], GLenum type) {
@@ -82,9 +83,3 @@ GLuint shd_create(char *vrtx, char *frag) {
 
     return program;
 }
-
-const struct _s_shaders SHD = {
-    shd_load,
-    shd_compile,
-    shd_create
-};
