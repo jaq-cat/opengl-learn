@@ -9,7 +9,7 @@ static unsigned long __last_id = 0;
 ecsj_component __component(unsigned int type, void *data, unsigned long size) {
   ecsj_component _c = (ecsj_component) {
     type,
-      NULL,
+    NULL,
   };
   _c.content = malloc(size);
   memcpy(_c.content, data, size);
@@ -42,14 +42,6 @@ void ecsj_entity_add_component(ecsj_entity *e, ecsj_component component) {
   ecsj_entity_expand(e);
 }
 
-void ecsj_entity_on_components_of_type(ecsj_entity *e, unsigned int type, void (*func)(ecsj_component* component)) {
-  for (unsigned short i=0; i<e->len; i++) {
-    if (e->components[i].type == type) {
-      func(&e->components[i]);
-    }
-  }
-}
-
 bool entity_has_components(ecsj_entity *e, unsigned int types[], unsigned int types_len) {
   bool found;
   for (int i=0; i<e->len; i++) {
@@ -71,4 +63,11 @@ void ecsj_on_entities_with_components(ecsj_entity *entities[], unsigned int enti
       func(entities[i]);
     }
   }
+}
+
+ecsj_component* ecsj_get_component(ecsj_entity *e, unsigned int type) {
+  for (unsigned short i=0; i<e->len; i++)
+    if (e->components[i].type == type)
+      return &e->components[i];
+  return NULL;
 }

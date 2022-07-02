@@ -23,8 +23,8 @@ ecsj_entity __entity();
 
 void ecsj_entity_add_component(ecsj_entity *e, ecsj_component component);
 
-void ecsj_entity_on_components_of_type(ecsj_entity *e, unsigned int type, void (*func)(ecsj_component* component));
-
 bool entity_has_components(ecsj_entity *e, unsigned int types[], unsigned int types_len);
 
 void ecsj_on_entities_with_components(ecsj_entity *entities[], unsigned int entities_len, unsigned int types[], unsigned int types_len, void (*func)(ecsj_entity* e));
+
+ecsj_component* ecsj_get_component(ecsj_entity *e, unsigned int type);
