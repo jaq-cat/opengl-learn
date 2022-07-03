@@ -5,7 +5,7 @@ PKGS    :=
 CC      := gcc
 CFLAGS  := -Iinclude -Ilibs
 CFLAGS  += -Wall -O2 -std=gnu17 #$(shell pkg-config --cflags $(PKGS))
-LDFLAGS := -lGL -lGLEW -lglfw #$(shell pkg-config --libs $(PKGS))
+LDFLAGS := -lGL -lGLEW -lglfw -lsoil2 #/usr/local/lib/libsoil2.so #$(shell pkg-config --libs $(PKGS))
 BINARY  := a.out
 
 .PHONY: dev clean compile cnr

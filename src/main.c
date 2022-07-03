@@ -5,21 +5,26 @@
 #include "objects.h"
 #include <stdlib.h>
 #include <stdio.h>
+#include <cglm/cglm.h>
 #include "ecsj/ecsj.h"
+#include <SOIL2.h>
 
 object triangle;
 
-void tri_start() {
+void myobj_start() {
 }
 
-void tri_update() {
+void myobj_update() {
 }
 
-void tri_init() {
+void myobj_init() {
   GLfloat positions[] = {
+    // top triangle
     -1.0f, 1.0f, // top left
     1.0f,  1.0f, // top right
     1.0f,  -1.0f, // bottom right
+
+    // bottom triangle
     1.0f,  -1.0f, // bottom right
     -1.0f,  -1.0f, // bottom left
     -1.0f,   1.0f // top left
@@ -28,7 +33,7 @@ void tri_init() {
   transform t = {0, 0};
   GLuint m = vbo_create(positions, sizeof(positions));
   collider c = {0};
-  triangle = obj_create(t, m, c, tri_start, tri_update);
+  triangle = obj_create(t, m, c, myobj_start, myobj_update);
 }
 
 int main() {
@@ -55,7 +60,7 @@ int main() {
   fprintf(stderr, "OpenGL vendor: %s\n", glGetString(GL_VENDOR));
   fprintf(stderr, "OpenGL version: %s\n", glGetString(GL_VERSION));
 
-  tri_init();
+  myobj_init();
 
   ecsj_component *trivbo_c = ecsj_get_component(&triangle, Model);
   GLuint trivbo;
