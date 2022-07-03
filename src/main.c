@@ -9,7 +9,7 @@
 #include "ecsj/ecsj.h"
 #include <SOIL2.h>
 
-object triangle;
+object myobj;
 
 void myobj_start() {
 }
@@ -33,7 +33,7 @@ void myobj_init() {
   transform t = {0, 0};
   GLuint m = vbo_create(positions, sizeof(positions));
   collider c = {0};
-  triangle = obj_create(t, m, c, myobj_start, myobj_update);
+  myobj = obj_create(t, m, c, myobj_start, myobj_update);
 }
 
 int main() {
@@ -62,14 +62,14 @@ int main() {
 
   myobj_init();
 
-  ecsj_component *trivbo_c = ecsj_get_component(&triangle, Model);
-  GLuint trivbo;
-  memcpy(&trivbo, trivbo_c->content, sizeof(GLuint));
+  ecsj_component *myobj_vbo_c = ecsj_get_component(&myobj, Model);
+  GLuint myobj_vbo;
+  memcpy(&myobj_vbo, myobj_vbo_c->content, sizeof(GLuint));
 
   // how to use positions in the shader
-  vbo_bind(trivbo);
-  GLuint trivao = vao_create(0, 0);
-  vao_bind(trivao);
+  vbo_bind(myobj_vbo);
+  GLuint myobj_vao = vao_create(0, 0);
+  vao_bind(myobj_vao);
   vao_attr(0, 2, GL_FLOAT, GL_FALSE, sizeof(GLfloat)*2);
 
   // shaders
