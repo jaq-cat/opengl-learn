@@ -9,7 +9,6 @@ typedef struct {
 } ecsj_component;
 
 typedef struct {
-  unsigned long id;
   ecsj_component* components;
   unsigned short len;
   unsigned short __allocated;

@@ -4,8 +4,6 @@
 #define __DEF_CALLOC 4
 #define EXPAND(x) x+5
 
-static unsigned long __last_id = 0;
-
 ecsj_component __component(unsigned int type, void *data, unsigned long size) {
   ecsj_component _c = (ecsj_component) {
     type,
@@ -18,7 +16,6 @@ ecsj_component __component(unsigned int type, void *data, unsigned long size) {
 
 ecsj_entity __entity() {
   ecsj_entity e = {
-    __last_id++,
   };
   e.components = malloc(sizeof(ecsj_component) * __DEF_CALLOC);
   e.__allocated = __DEF_CALLOC;
