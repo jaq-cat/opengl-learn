@@ -85,14 +85,13 @@ int main() {
     glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 
     // draw stuff
-    /*glFlush();*/
-
     glDrawArrays(GL_TRIANGLES, 0, 6);
 
     // show stuff
     glfwSwapBuffers(win);
 
     glfwPollEvents();
+
     // close window
     if (glfwGetKey(win, GLFW_KEY_ESCAPE))
       glfwSetWindowShouldClose(win, 1);
