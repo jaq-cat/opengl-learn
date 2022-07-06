@@ -8,7 +8,7 @@ typedef struct {
   GLfloat x, y;
 } transform;
 
-typedef GLuint model;
+typedef GLuint vbo;
 
 typedef struct {
   char placeholder;
@@ -21,9 +21,9 @@ typedef struct {
 
 typedef enum {
   Transform,
-  Model,
+  VBO,
   Collider,
   Methods,
 } component_types;
 
-object obj_create(transform transform_data, model model_data, collider collider_data, void (*start)(), void (*update)());
+object obj_create(transform transform_data, vbo vbo_data, collider collider_data, void (*start)(), void (*update)());

@@ -1,10 +1,10 @@
 #include "vbo.h"
 
-int vbo_create(GLfloat data[], GLuint size) {
+int vbo_create(GLfloat data[], GLuint size, GLenum usage) {
   GLuint vbo;
   glGenBuffers(1, &vbo);
   glBindBuffer(GL_ARRAY_BUFFER, vbo);
-  glBufferData(GL_ARRAY_BUFFER, size, data, GL_STATIC_DRAW);
+  glBufferData(GL_ARRAY_BUFFER, size, data, usage);
   glBindBuffer(GL_ARRAY_BUFFER, 0);
 
   return vbo;

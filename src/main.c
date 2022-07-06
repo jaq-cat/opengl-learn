@@ -31,7 +31,7 @@ void myobj_init() {
   };
 
   transform t = {0, 0};
-  GLuint m = vbo_create(positions, sizeof(positions));
+  GLuint m = vbo_create(positions, sizeof(positions), GL_STATIC_DRAW);
   collider c = {0};
   myobj = obj_create(t, m, c, myobj_start, myobj_update);
 }
@@ -62,14 +62,16 @@ int main() {
 
   myobj_init();
 
-  ecsj_component *myobj_vbo_c = ecsj_get_component(&myobj, Model);
+  // get vbo from component
+  ecsj_component *myobj_vbo_c = ecsj_get_component(&myobj, VBO);
   GLuint myobj_vbo;
   memcpy(&myobj_vbo, myobj_vbo_c->content, sizeof(GLuint));
 
-  // how to use positions in the shader
+  // how to use data in the shader
   vbo_bind(myobj_vbo);
-  GLuint myobj_vao = vao_create(0, 0);
+  GLuint myobj_vao = vao_create();
   vao_bind(myobj_vao);
+  vao_enable(myobj_vao);
   vao_attr(0, 2, GL_FLOAT, GL_FALSE, sizeof(GLfloat)*2);
 
   // shaders
