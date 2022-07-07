@@ -65,7 +65,7 @@ int main() {
   // get vbo from component
   ecsj_component *myobj_vbo_c = ecsj_get_component(&myobj, VBO);
   GLuint myobj_vbo;
-  memcpy(&myobj_vbo, myobj_vbo_c->content, sizeof(GLuint));
+  ECSJ_CONTENT(myobj_vbo, GLuint, myobj_vbo_c);
 
   // how to use data in the shader
   vbo_bind(myobj_vbo);

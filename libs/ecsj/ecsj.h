@@ -3,6 +3,9 @@
 #include <stdlib.h>
 #include <stdbool.h>
 
+#define ECSJ_CONTENT(varname, type, component)\
+  memcpy(&varname, component->content, sizeof(type))
+
 typedef struct {
   unsigned int type;
   void *content;
